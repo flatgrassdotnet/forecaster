@@ -32,6 +32,11 @@ import (
 
 var t = template.Must(template.New("viewer.html").ParseFiles("data/templates/viewer/viewer.html"))
 
+type Viewer struct {
+	Package common.Package
+	Category string
+}
+
 func Handle(w http.ResponseWriter, r *http.Request) {
 	v := make(url.Values)
 	v.Set("id", r.PathValue("id"))
@@ -49,7 +54,10 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = t.Execute(w, pkg)
+	err = t.Execute(w, Viewer{
+		Package: pkg,
+		Category: r.URL.Query().Get("show"),
+	})
 	if err != nil {
 		utils.WriteError(w, r, fmt.Sprintf("failed to execute template: %s", err))
 		return
