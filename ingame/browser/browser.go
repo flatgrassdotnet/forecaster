@@ -99,6 +99,10 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 		v.Set("author", string(steamid))
 	}
 
+	if r.URL.Query().Has("search") {
+		v.Set("search", r.URL.Query().Get("search"))
+	}
+
 	resp, err := http.Get(fmt.Sprintf("https://api.cl0udb0x.com/packages/list?%s", v.Encode()))
 	if err != nil {
 		utils.WriteError(w, r, fmt.Sprintf("failed to get package list: %s", err))
