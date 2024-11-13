@@ -31,7 +31,7 @@
 		</div>
 		<div class="header">
 			<div class="subbar">
-				<a href="?sort=newest" id="newest"{{if eq .Sort "newest"}} class="active"{{end}}><span>Newest</span></a>
+				<a href="?sort=newest" id="newest"{{if or (eq .Sort "newest") (eq .Sort "")}} class="active"{{end}}><span>Newest</span></a>
 				<a href="?sort=random" id="random"{{if eq .Sort "random"}} class="active"{{end}}><span>Random</span></span></a>
 				<a href="?sort=mostfavs" id="mostfavs"{{if eq .Sort "mostfavs"}} class="active"{{end}}><span>Most Favorite</span></a>
 				<a href="?sort=mostlikes" id="mostlikes"{{if eq .Sort "mostlikes"}} class="active"{{end}}><span>Most Liked</span></a>
