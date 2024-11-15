@@ -60,7 +60,7 @@
 					{{continue}}
 				{{end}}
 				<div class="item">
-					<a {{if $.InGame}}href="garrysmod://{{if (eq .Type "map")}}install{{else}}spawn{{end}}/{{.Type}}/{{.ID}}/{{.Revision}}"{{else}}onclick="cloudbox.GetPackage('{{.Type}}', {{.ID}}, {{.Revision}})"{{end}}>
+					<a {{if and ($.InGame) (not $.GM13)}}href="garrysmod://{{if (eq .Type "map")}}install{{else}}spawn{{end}}/{{.Type}}/{{.ID}}/{{.Revision}}"{{else}}onclick="cloudbox.GetPackage('{{.Type}}', {{.ID}}, {{.Revision}})"{{end}}>
 						<div class="thumb" style="background-image: url('//img.cl0udb0x.com/{{.ID}}_thumb_128.png'), url('/assets/rustmb/missing.svg');"></div>
 						<div class="name">
 							{{.Name}}
