@@ -35,6 +35,7 @@ import (
 
 type Browser struct {
 	InGame   bool
+	GM13     bool
 	LoggedIn bool
 	MapName  string
 	Search   string
@@ -131,7 +132,8 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 	}
 
 	err = t.Execute(w, Browser{
-		InGame:   r.Header.Get("GMOD_VERSION") != "",
+		InGame:   strings.Contains(r.UserAgent(), "Valve"),
+		GM13:     strings.Contains(r.UserAgent(), "GMod/13"),
 		LoggedIn: steamid != nil,
 		MapName:  r.Header.Get("MAP"),
 		Search:   r.URL.Query().Get("search"),
