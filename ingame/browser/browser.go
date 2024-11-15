@@ -103,6 +103,10 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 		v.Set("search", r.URL.Query().Get("search"))
 	}
 
+	if r.Host == "safe.cl0udb0x.com" {
+		v.Set("safemode", "true")
+	}
+
 	resp, err := http.Get(fmt.Sprintf("https://api.cl0udb0x.com/packages/list?%s", v.Encode()))
 	if err != nil {
 		utils.WriteError(w, r, fmt.Sprintf("failed to get package list: %s", err))
