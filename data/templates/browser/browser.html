@@ -6,7 +6,7 @@
 	<body>
 		<div class="header">
 			<div class="navbar">
-				{{if or (not .InGame) (ne .Category "map")}}
+				{{if or (not .InGame) (ne .Category "map") (.GM13)}}
 					{{if .InGame}}
 						<a href="/browse/mine" id="mine"{{if not .LoggedIn}} class="disabled"{{end}}{{if eq .Category "mine"}} class="active"{{end}}><div class="navicon"></div><br>Mine<br></a>
 					{{end}}
