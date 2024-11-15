@@ -131,9 +131,11 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 		next = "#"
 	}
 
+	ingame := strings.Contains(r.UserAgent(), "Valve") || r.Host == "toybox.garrysmod.com" || r.Host == "ingame.cl0udb0x.com" || r.Host == "safe.cl0udb0x.com"
+
 	err = t.Execute(w, Browser{
-		InGame:   strings.Contains(r.UserAgent(), "Valve"),
-		GM13:     strings.Contains(r.UserAgent(), "GMod/13"),
+		InGame:   ingame,
+		GM13:     ingame && r.Host != "toybox.garrysmod.com",
 		LoggedIn: steamid != nil,
 		MapName:  r.Header.Get("MAP"),
 		Search:   r.URL.Query().Get("search"),
