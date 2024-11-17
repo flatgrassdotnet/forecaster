@@ -73,6 +73,11 @@
 								<div class="meta-thumb"><div class="img" style="background-image: url('//img.cl0udb0x.com/{{.ID}}_thumb_128.png'), url('/assets/rustmb/missing.svg');"></div></div>
 									<div class="meta-info">
 										<div class="meta-name">{{.Name}}</div>
+										<div class="meta-stats">
+											<div><img src="/assets/rustmb/mostlikes.png" style="-webkit-filter: brightness(0.5) sepia(5) hue-rotate(100deg) saturate(3);"><span style="color:#00AA00;">{{.Goods}}</span> / <span style="color:#AA0000">{{.Bads}}</span></div>
+											<div style="color:#3333FF"><img src="/assets/rustmb/mostdls.png" style="-webkit-filter: brightness(0.5) sepia(5) hue-rotate(180deg) saturate(5);">{{.Downloads}}</div>
+											<div style="color:#AAAA00"><img src="/assets/rustmb/mostfavs.png" style="-webkit-filter: brightness(0.5) sepia(5) hue-rotate(0deg) saturate(3) brightness(1.2);">{{.Favorites}}</div>
+										  </div>
 										<div class="meta-user">
 											{{if lt .ID 200000}}
 												<img src="/assets/gmodpink.png">
