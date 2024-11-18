@@ -2,6 +2,9 @@
 	<head>
 		<title>Cloudbox</title>
 		<link rel="stylesheet" href="/assets/cloudbox.css" type="text/css">
+		{{if .GM13}}<style>html, body {background: transparent !important;}
+		.header + .header + .topclouds {opacity: 0;}
+		.header + .header + .topclouds + .content {background-color: #B8E3FF;}</style>{{end}}
 	</head>
 	<body>
 		<div class="header">
