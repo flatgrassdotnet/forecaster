@@ -57,7 +57,7 @@ var (
 		"saves":    "savemap",
 		"maps":     "map",
 	}
-	t = template.Must(template.New("browser.html").Funcs(template.FuncMap{"StripHTTPS": func(url string) string { s, _ := strings.CutPrefix(url, "https:"); return s }}).ParseFiles("data/templates/browser/browser.html"))
+	t = template.Must(template.New("browser.html").Funcs(template.FuncMap{"StripHTTPS": func(url string) string { s, _ := strings.CutPrefix(url, "https:"); return s }}).ParseGlob("data/templates/browser/*.html"))
 )
 
 func Handle(w http.ResponseWriter, r *http.Request) {

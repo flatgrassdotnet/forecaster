@@ -1,0 +1,6 @@
+{{define "pagenav"}}
+<div class="navbar">
+	<a href="{{.PrevLink}}{{if ne .Sort ""}}&sort={{.Sort}}{{end}}" id="prev"{{if eq .PrevLink "#"}} class="disabled"{{end}}><div class="navicon"></div><br>Previous</a>
+	<a href="{{.NextLink}}{{if ne .Sort ""}}&sort={{.Sort}}{{end}}" id="next"{{if eq .NextLink "#"}} class="disabled"{{end}}><div class="navicon"></div><br>Next</a>
+</div>
+{{end}}

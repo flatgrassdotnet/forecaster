@@ -1,0 +1,16 @@
+{{define "categorybar"}}
+<div class="navbar">
+	{{if or (not .InGame) (ne .Category "map") (.GM13)}}
+		{{if .InGame}}
+			<a href="/browse/mine" id="mine"{{if not .LoggedIn}} class="disabled"{{end}}{{if eq .Category "mine"}} class="active"{{end}}><div class="navicon"></div><br>Mine<br></a>
+		{{end}}
+		<a href="/browse/entities" id="entity"{{if eq .Category "entity"}} class="active"{{end}}><div class="navicon"></div><br>Entities</a>
+		<a href="/browse/weapons" id="weapon"{{if eq .Category "weapon"}} class="active"{{end}}><div class="navicon"></div><br>Weapons</a>
+		<a href="/browse/props" id="prop"{{if eq .Category "prop"}} class="active"{{end}}><div class="navicon"></div><br>Props</a>
+		<a href="/browse/saves" id="savemap"{{if eq .Category "savemap"}} class="active"{{end}}><div class="navicon"></div><br>Saves</a>
+		{{if or (not .InGame) (.GM13)}}
+			<a href="/browse/maps" id="map"{{if eq .Category "map"}} class="active"{{end}}><div class="navicon"></div><br>Maps</a>
+		{{end}}
+	{{end}}
+</div>
+{{end}}
