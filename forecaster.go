@@ -25,6 +25,7 @@ import (
 	"net/http"
 
 	"github.com/flatgrassdotnet/forecaster/ingame/browser"
+	"github.com/flatgrassdotnet/forecaster/ingame/home"
 	"github.com/flatgrassdotnet/forecaster/ingame/publishsave"
 	"github.com/flatgrassdotnet/forecaster/ingame/viewer"
 )
@@ -37,6 +38,7 @@ func main() {
 	http.Handle("GET /assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("data/assets"))))
 
 	// cloudbox pages
+	http.HandleFunc("GET /home", home.Handle)
 	http.HandleFunc("GET /browse/{category}", browser.Handle)
 	http.HandleFunc("GET /view/{id}", viewer.Handle)
 
@@ -51,7 +53,7 @@ func main() {
 			return
 		}
 
-		http.Redirect(w, r, "/browse/entities", http.StatusSeeOther)
+		http.Redirect(w, r, "/home", http.StatusSeeOther)
 	})
 	http.HandleFunc("GET toybox.garrysmod.com/ingame/", func(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/browse/entities", http.StatusSeeOther)

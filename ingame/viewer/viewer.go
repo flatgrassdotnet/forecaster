@@ -33,7 +33,7 @@ import (
 var t = template.Must(template.New("viewer.html").ParseFiles("data/templates/viewer/viewer.html"))
 
 type Viewer struct {
-	Package common.Package
+	Package  common.Package
 	Category string
 }
 
@@ -55,7 +55,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 	}
 
 	err = t.Execute(w, Viewer{
-		Package: pkg,
+		Package:  pkg,
 		Category: r.URL.Query().Get("show"),
 	})
 	if err != nil {

@@ -2,14 +2,15 @@
 	<head>
 		<title>Cloudbox</title>
 		<link rel="stylesheet" href="/assets/cloudbox.css" type="text/css">
-		{{if .GM13}}<style>html, body {background: transparent !important;} .header + .header + .topclouds {opacity: 0;} .header + .header + .topclouds + .content {background-color: #B8E3FF;}</style>{{end}}
 		{{if not .GM13}}<script>var cloudbox = {}; cloudbox.GetPackage = function (type, id, rev) {window.location = "garrysmod://" + (type === "map" ? "install" : "spawn") + "/" + type + "/" + id + "/" + rev;}</script>{{end}}
 	</head>
 	<body>
 		<div class="header">
 			{{template "categorybar" .}}
-			{{template "searchbar" .}}
-			{{template "pagenav" .}}
+			{{if not .HomePage}}
+				{{template "searchbar" .}}
+				{{template "pagenav" .}}
+			{{end}}
 		</div>
 		<div class="header">
 			{{template "sortbar" .}}
@@ -18,15 +19,21 @@
 			{{end}}
 			</div>
 		</div>
-		<div class="topclouds"></div>
-		<div class="content">
-			{{range .Packages}}
-				{{if and ($.InGame) (eq $.Category "savemap") (ne $.MapName .Dataname)}}
-					{{continue}}
+		<div class="topclouds" {{if .GM13}}style="opacity: 0;"{{end}}></div>
+		{{if .HomePage}}
+			<div class="content" style="padding-top:0">
+				{{template "home" .}}
+			</div>
+		{{else}}
+			<div class="content" style="text-align:center;">
+				{{range .Packages}}
+					{{if and ($.InGame) (eq $.Category "savemap") (ne $.MapName .Dataname)}}
+						{{continue}}
+					{{end}}
+					{{template "item" .}}
 				{{end}}
-				{{template "item" .}}
-			{{end}}
-		</div>
+			</div>
+		{{end}}
 	</body>
 	<div class="bottomclouds"></div>
 </html>

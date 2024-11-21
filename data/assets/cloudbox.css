@@ -1,4 +1,5 @@
-body {height: 100%; margin: 0px; font-family: Helvetica; background-color: #B8E3FF; color: #333; display: -webkit-box; -webkit-box-orient: vertical;}
+html, body {background-color: transparent;}
+body {height: 100%; margin: 0px; font-family: Helvetica; color: #333; display: -webkit-box; -webkit-box-orient: vertical;}
 a {color: #333; text-decoration: none;}
 a:hover {color: #FFF;}
 h1 {margin-left: 10px;}
@@ -14,6 +15,8 @@ h1 {margin-left: 10px;}
 .subbar span {margin-left: 20px;}
 .subbar .disabled {opacity: 0.25; pointer-events: none;}
 
+#home {background-image: url('/assets/rustmb/home.png');}
+#home:hover, #home.active {background-image: url('/assets/rustmb/home_hover.png');}
 #mine {background-image: url('/assets/rustmb/mine.png');}
 #mine:hover, #mine.active {background-image: url('/assets/rustmb/mine_hover.png');}
 #entity {background-image: url('/assets/rustmb/entity.png');}
@@ -31,6 +34,8 @@ h1 {margin-left: 10px;}
 #prev:hover {background-image: url('/assets/rustmb/leftarrow_hover.png')}
 #next {background-image: url('/assets/rustmb/rightarrow.png')}
 #next:hover {background-image: url('/assets/rustmb/rightarrow_hover.png')}
+#reroll {background-image: url('/assets/rustmb/reroll.png')}
+#reroll:hover {background-image: url('/assets/rustmb/reroll_hover.png')}
 
 #newest {background-image: url('/assets/rustmb/newest.png')}
 #newest:hover, #newest.active {background-image: url('/assets/rustmb/newest_hover.png')}
@@ -56,7 +61,23 @@ h1 {margin-left: 10px;}
 .savetools {padding: 16px 8px;}
 .savetools a {margin: 8px; font-weight: bolder;}
 
-.content {padding: 16px 8px; overflow-y: auto; -webkit-box-flex: 1; text-align: center; padding-bottom: 160px;}
+.content {padding: 16px 8px; overflow-y: auto; background-color: #B8E3FF; -webkit-box-flex: 1; padding-bottom: 160px;}
+
+.pillbox {background: white; -webkit-border-radius: 14px; padding: 5px 10px; overflow: hidden; margin-left: auto; margin-right: auto; width: 90%;}
+.pillbox:not(:last-child) {margin-bottom: 6px;}
+
+.pillbox h2, .pillbox h3, .pillbox h4 {color: #4096ee; margin: 0; margin-bottom: 6px;}
+.pillbox sub {font-style: italic; margin-left: 10px;}
+.pillbox div.newsformat {margin: 13px 0px; font-size: 13px; white-space: pre-line;}
+
+#lessnews-toggle, #morenews-toggle {float:right; background-color: #4096ee; color: white; border:2px solid #333; -webkit-border-radius: 3px; padding: 3px 6px; font-size: 13px; font-weight: bold;}
+#lessnews-toggle:hover, #morenews-toggle:hover {background-color: #b8e3ff; color: #333;}
+#lessnews-toggle:focus, #morenews-toggle:focus {background-color: #b8e3ff; color: #333;}
+#lessnews-toggle img, #morenews-toggle img {width:46px;}
+
+#morenews {max-height: 80%; overflow: auto;}
+#morenews > div:not(:last-child) {border-bottom: 1px dotted lightgray;}
+
 
 .item {width: 128px; height: 125px; margin-left: 2px; margin-right: 2px; display: inline-block; cursor: pointer;}
 .item .thumb {width: 128px; height: 100px; border: 2px solid; border-color: #595959; border-radius: 4px; margin-bottom: 1px; background-position: center;}

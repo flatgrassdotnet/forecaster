@@ -16,7 +16,7 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package browser
+package home
 
 import (
 	_ "embed"
@@ -26,25 +26,30 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"strconv"
+	"slices"
 	"strings"
 
 	"github.com/flatgrassdotnet/forecaster/common"
 	"github.com/flatgrassdotnet/forecaster/utils"
 )
 
-type Browser struct {
-	InGame   bool
-	GM13     bool
-	LoggedIn bool
-	HomePage bool
-	MapName  string
-	Search   string
-	Sort     string
-	Category string
-	Packages []common.Package
-	PrevLink string
-	NextLink string
+type Home struct {
+	InGame       bool
+	GM13         bool
+	LoggedIn     bool
+	HomePage     bool
+	MapName      string
+	Search       string
+	Sort         string
+	Category     string
+	Packages     []common.Package
+	PrevLink     string
+	NextLink     string
+	LatestNews   common.NewsEntry
+	AllNews      []common.NewsEntry
+	PopularENTs  []common.Package
+	PopularSWEPs []common.Package
+	PopularMaps  []common.Package
 }
 
 const itemsPerPage = 50
@@ -62,17 +67,6 @@ var (
 )
 
 func Handle(w http.ResponseWriter, r *http.Request) {
-	category, ok := categories[r.PathValue("category")]
-	if !ok {
-		http.Error(w, "unknown category", http.StatusNotFound)
-		return
-	}
-
-	page, _ := strconv.Atoi(r.URL.Query().Get("page"))
-	if page < 1 {
-		page = 1
-	}
-
 	var steamid []byte
 	if r.Header.Get("TICKET") != "" {
 		v := make(url.Values)
@@ -92,65 +86,82 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 	}
 
 	v := make(url.Values)
-	v.Set("type", category)
-	v.Set("offset", strconv.Itoa((page-1)*itemsPerPage))
-	v.Set("count", strconv.Itoa(itemsPerPage))
-	if category == "mine" {
-		v.Del("type")
-		v.Set("author", string(steamid))
-	}
-
-	sort := r.URL.Query().Get("sort")
-	if sort == "" {
-		sort = "random"
-	}
-
-	v.Set("sort", sort)
-
-	if r.URL.Query().Has("search") {
-		v.Set("search", r.URL.Query().Get("search"))
-	}
+	v.Set("count", "15")
+	v.Set("sort", "mostfavs")
 
 	if r.Host == "safe.cl0udb0x.com" {
 		v.Set("safemode", "true")
 	}
 
+	v.Set("type", "entity")
 	resp, err := http.Get(fmt.Sprintf("https://api.cl0udb0x.com/packages/list?%s", v.Encode()))
 	if err != nil {
 		utils.WriteError(w, r, fmt.Sprintf("failed to get package list: %s", err))
 		return
 	}
 
-	var list []common.Package
-	err = json.NewDecoder(resp.Body).Decode(&list)
+	var ents []common.Package
+	err = json.NewDecoder(resp.Body).Decode(&ents)
 	if err != nil {
 		utils.WriteError(w, r, fmt.Sprintf("failed to decode package list: %s", err))
 		return
 	}
 
-	prev := fmt.Sprintf("?page=%d", page-1)
-	if page <= 1 {
-		prev = "#"
+	v.Set("type", "weapon")
+	resp, err = http.Get(fmt.Sprintf("https://api.cl0udb0x.com/packages/list?%s", v.Encode()))
+	if err != nil {
+		utils.WriteError(w, r, fmt.Sprintf("failed to get package list: %s", err))
+		return
 	}
 
-	next := fmt.Sprintf("?page=%d", page+1)
-	if len(list) < itemsPerPage {
-		next = "#"
+	var sweps []common.Package
+	err = json.NewDecoder(resp.Body).Decode(&sweps)
+	if err != nil {
+		utils.WriteError(w, r, fmt.Sprintf("failed to decode package list: %s", err))
+		return
 	}
+
+	v.Set("type", "map")
+	resp, err = http.Get(fmt.Sprintf("https://api.cl0udb0x.com/packages/list?%s", v.Encode()))
+	if err != nil {
+		utils.WriteError(w, r, fmt.Sprintf("failed to get package list: %s", err))
+		return
+	}
+
+	var maps []common.Package
+	err = json.NewDecoder(resp.Body).Decode(&maps)
+	if err != nil {
+		utils.WriteError(w, r, fmt.Sprintf("failed to decode package list: %s", err))
+		return
+	}
+
+	resp, err = http.Get(fmt.Sprintf("https://api.cl0udb0x.com/news/list"))
+	if err != nil {
+		utils.WriteError(w, r, fmt.Sprintf("failed to get news list: %s", err))
+		return
+	}
+
+	var news []common.NewsEntry
+	err = json.NewDecoder(resp.Body).Decode(&news)
+	if err != nil {
+		utils.WriteError(w, r, fmt.Sprintf("failed to decode news list: %s", err))
+		return
+	}
+
+	slices.Reverse(news)
 
 	ingame := strings.Contains(r.UserAgent(), "Valve") || r.Host == "toybox.garrysmod.com" || r.Host == "ingame.cl0udb0x.com" || r.Host == "safe.cl0udb0x.com"
 
-	err = t.Execute(w, Browser{
-		InGame:   ingame,
-		GM13:     ingame && r.Host != "toybox.garrysmod.com",
-		LoggedIn: steamid != nil,
-		MapName:  r.Header.Get("MAP"),
-		Search:   r.URL.Query().Get("search"),
-		Sort:     sort,
-		Category: category,
-		Packages: list,
-		PrevLink: prev,
-		NextLink: next,
+	err = t.Execute(w, Home{
+		InGame:       ingame,
+		GM13:         ingame && r.Host != "toybox.garrysmod.com",
+		LoggedIn:     steamid != nil,
+		HomePage:     true,
+		LatestNews:   news[0],
+		AllNews:      news,
+		PopularENTs:  ents,
+		PopularSWEPs: sweps,
+		PopularMaps:  maps,
 	})
 	if err != nil {
 		utils.WriteError(w, r, fmt.Sprintf("failed to execute template: %s", err))

@@ -1,0 +1,75 @@
+{{define "home"}}
+<div class="pillbox" id="lessnews">
+	<button id="morenews-toggle">
+		<img src="/assets/rustmb/news.png" />
+		<br>
+		<span>More News</span>
+	</button>
+	<h2>What's New?</h2>
+	
+	<h4>{{.LatestNews.Title}}</h4>
+	<sub>by {{.LatestNews.Author}} - {{.LatestNews.Time.Format "02 January 2006, 3:04 pm (UTC)"}}</sub>
+	<div class="newsformat">{{.LatestNews.Body}}</div>
+</div>
+
+<div class="pillbox" id="morenews" hidden>
+	<button id="lessnews-toggle">
+		<img src="/assets/rustmb/news.png" />
+		<br>
+		<span>Less News</span>
+	</button>
+	<h2>What's New?</h2>
+	
+	{{range .AllNews}}
+		<div>
+			<h4>{{.Title}}</h4>
+			<sub>by {{.Author}} - {{.Time.Format "02 January 2006, 3:04 pm (UTC)"}}</sub>
+			<div class="newsformat">{{.Body}}</div>
+		</div>
+	{{end}}
+</div>
+
+<script>
+	var lessnews = document.getElementById("lessnews");
+	var morenews = document.getElementById("morenews");
+	var lessnewsBtn = document.getElementById("lessnews-toggle");
+	var morenewsBtn = document.getElementById("morenews-toggle");
+	lessnewsBtn.addEventListener("click", function() {
+		lessnews.removeAttribute("hidden");
+		morenews.setAttribute("hidden","hidden");
+	});
+
+	morenewsBtn.addEventListener("click", function() {
+		morenews.removeAttribute("hidden");
+		lessnews.setAttribute("hidden","hidden");
+	});
+</script>
+
+<div class="pillbox">
+	<h4>Popular Entities</h4>
+	<div style="white-space:nowrap; overflow:hidden;">
+		{{range .PopularENTs}}
+			{{template "item" .}}
+		{{end}}
+	</div>
+</div>
+
+<div class="pillbox">
+	<h4>Popular Weapons</h4>
+	<div style="white-space:nowrap; overflow:hidden;">
+		{{range .PopularSWEPs}}
+			{{template "item" .}}
+		{{end}}
+	</div>
+</div>
+
+<div class="pillbox">
+	<small style="float:right">Note: Clicking a map below will automatically load the map</small>
+	<h4>Popular Maps</h4>
+	<div style="white-space:nowrap; overflow:hidden;">
+		{{range .PopularMaps}}
+			{{template "item" .}}
+		{{end}}
+	</div>
+</div>
+{{end}}
