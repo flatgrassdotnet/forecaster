@@ -13,7 +13,7 @@
 		</div>
 		<div class="header">
 			{{template "sortbar" .}}
-			{{if and (.InGame) (eq .Category "savemap") (not .GM13)}}
+			{{if and (.InGame) (eq .Category "savemap")}}
 				{{template "savetools" .}}
 			{{end}}
 			</div>
