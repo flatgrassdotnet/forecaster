@@ -1,7 +1,7 @@
 {{define "sortbar"}}
 <div class="subbar" {{if .HomePage}}style="visibility:hidden; pointer-events:none;"{{end}}>
-	<a href="?sort=newest" id="newest"{{if eq .Sort "newest"}} class="active"{{end}}><span>Newest</span></a>
 	<a href="?sort=random" id="random"{{if or (eq .Sort "random") (eq .Sort "")}} class="active"{{end}}><span>Random</span></span></a>
+	<a href="?sort=newest" id="newest"{{if eq .Sort "newest"}} class="active"{{end}}><span>Newest</span></a>
 	<a href="?sort=mostfavs" id="mostfavs"{{if eq .Sort "mostfavs"}} class="active"{{end}}><span>Most Favorite</span></a>
 	<a href="?sort=mostlikes" id="mostlikes"{{if eq .Sort "mostlikes"}} class="active"{{end}}><span>Most Liked</span></a>
 	<a href="?sort=mostdls" id="mostdls"{{if eq .Sort "mostdls"}} class="active"{{end}}><span>Most Used</span></a>
