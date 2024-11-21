@@ -70,7 +70,7 @@ h1 {margin-left: 10px;}
 .pillbox sub {font-style: italic; margin-left: 10px;}
 .pillbox div.newsformat {margin: 13px 0px; font-size: 13px; white-space: pre-line;}
 
-#lessnews-toggle, #morenews-toggle {float:right; background-color: #4096ee; color: white; border:2px solid #333; -webkit-border-radius: 3px; padding: 3px 6px; font-size: 13px; font-weight: bold;}
+#lessnews-toggle, #morenews-toggle {float:right; background-color: #4096ee; color: white; border:2px solid #333; -webkit-border-radius: 3px; padding: 3px 6px; font-size: 13px; font-weight: bold; cursor: pointer;}
 #lessnews-toggle:hover, #morenews-toggle:hover {background-color: #b8e3ff; color: #333;}
 #lessnews-toggle:focus, #morenews-toggle:focus {background-color: #b8e3ff; color: #333;}
 #lessnews-toggle img, #morenews-toggle img {width:46px;}
