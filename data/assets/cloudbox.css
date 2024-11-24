@@ -84,10 +84,6 @@ a.textlink:hover {color: #4096ee;}
 a.morelink {width:22px; height:1em; display:inline-block; margin-left:2px; vertical-align:sub; background-size:contain; background-position:center; background-repeat:no-repeat; background-image:url("/assets/rustmb/link.png");}
 a.morelink:hover {background-image:url("/assets/rustmb/link_hover.png");}
 
-#lessnews-toggle, #morenews-toggle {float:right; background-color: #4096ee; color: white; border:2px solid #333; -webkit-border-radius: 3px; padding: 3px 6px; font-size: 13px; font-weight: bold;}
-#lessnews-toggle:hover, #morenews-toggle:hover {background-color: #b8e3ff; color: #333;}
-#lessnews-toggle:focus, #morenews-toggle:focus {background-color: #b8e3ff; color: #333;}
-#lessnews-toggle img, #morenews-toggle img {width:46px;}
 
 #morenews > div:not(:last-child) {border-bottom: 1px dotted lightgray;}
 
@@ -100,7 +96,8 @@ a.morelink:hover {background-image:url("/assets/rustmb/link_hover.png");}
 
 .item .info {position: fixed; background: rgba(255, 255, 255, 0.9); bottom: 0; left: 0; right: 0; height: 120px; opacity: 1; pointer-events: none; transition: opacity 0.2s linear, bottom 0.2s linear; -webkit-transition: opacity 0.2s linear, bottom 0.2s linear; z-index: 10;}
 .item:not(:hover) .info {opacity: 0; bottom: -120px;}
-.item .info .clouds {content: " "; height: 40px; background: url('/assets/rustmb/cloudswhite.svg') transparent; width: 100%; position: absolute; top: -40px; left: 0px; right: 0px; animation: swoosh 7.5s linear infinite; -webkit-animation: swoosh 10s linear infinite; opacity: 0.9;}
+.item .info .clouds {content: " "; height: 40px; background: url('/assets/rustmb/cloudswhite.svg') transparent; width: 100%; position: relative; top: -40px; left: 0px; right: 0px; margin-bottom:-40px; opacity: 0.9; animation: swoosh 7.5s linear infinite; -webkit-animation: swoosh 10s linear infinite;}
+.item:not(:hover) .info .clouds {animation-play-state:paused; -webkit-animation-play-state: paused;}
 
 .metabox {margin-left: 10px; margin-right: 10px;}
 .metabox-left, .metabox-right {height: 125px;}
