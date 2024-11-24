@@ -38,6 +38,7 @@ type Home struct {
 	GM13         bool
 	LoggedIn     bool
 	HomePage     bool
+	PageType     string
 	MapName      string
 	Search       string
 	Sort         string
@@ -45,8 +46,7 @@ type Home struct {
 	Packages     []common.Package
 	PrevLink     string
 	NextLink     string
-	LatestNews   common.NewsEntry
-	AllNews      []common.NewsEntry
+	News         []common.NewsEntry
 	PopularENTs  []common.Package
 	PopularSWEPs []common.Package
 	PopularMaps  []common.Package
@@ -55,18 +55,23 @@ type Home struct {
 const itemsPerPage = 50
 
 var (
-	categories = map[string]string{
-		"mine":     "mine",
-		"entities": "entity",
-		"weapons":  "weapon",
-		"props":    "prop",
-		"saves":    "savemap",
-		"maps":     "map",
+	pagetypes = map[string]string{
+		"home":  "home",
+		"news":  "news",
+		"info":  "info",
+		"error": "error",
 	}
 	t = template.Must(template.New("browser.html").Funcs(template.FuncMap{"StripHTTPS": func(url string) string { s, _ := strings.CutPrefix(url, "https:"); return s }}).ParseGlob("data/templates/browser/*.html"))
 )
 
 func Handle(w http.ResponseWriter, r *http.Request) {
+
+	pagetype, ok := pagetypes[r.PathValue("pagetype")]
+	if !ok {
+		http.Error(w, "unknown page", http.StatusNotFound)
+		return
+	}
+
 	var steamid []byte
 	if r.Header.Get("TICKET") != "" {
 		v := make(url.Values)
@@ -93,72 +98,80 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 		v.Set("safemode", "true")
 	}
 
-	v.Set("type", "entity")
-	resp, err := http.Get(fmt.Sprintf("https://api.cl0udb0x.com/packages/list?%s", v.Encode()))
-	if err != nil {
-		utils.WriteError(w, r, fmt.Sprintf("failed to get package list: %s", err))
-		return
-	}
-
 	var ents []common.Package
-	err = json.NewDecoder(resp.Body).Decode(&ents)
-	if err != nil {
-		utils.WriteError(w, r, fmt.Sprintf("failed to decode package list: %s", err))
-		return
-	}
-
-	v.Set("type", "weapon")
-	resp, err = http.Get(fmt.Sprintf("https://api.cl0udb0x.com/packages/list?%s", v.Encode()))
-	if err != nil {
-		utils.WriteError(w, r, fmt.Sprintf("failed to get package list: %s", err))
-		return
-	}
-
 	var sweps []common.Package
-	err = json.NewDecoder(resp.Body).Decode(&sweps)
-	if err != nil {
-		utils.WriteError(w, r, fmt.Sprintf("failed to decode package list: %s", err))
-		return
-	}
-
-	v.Set("type", "map")
-	resp, err = http.Get(fmt.Sprintf("https://api.cl0udb0x.com/packages/list?%s", v.Encode()))
-	if err != nil {
-		utils.WriteError(w, r, fmt.Sprintf("failed to get package list: %s", err))
-		return
-	}
-
 	var maps []common.Package
-	err = json.NewDecoder(resp.Body).Decode(&maps)
-	if err != nil {
-		utils.WriteError(w, r, fmt.Sprintf("failed to decode package list: %s", err))
-		return
-	}
+	if pagetype == "home" {
+		v.Set("type", "entity")
+		resp, err := http.Get(fmt.Sprintf("https://api.cl0udb0x.com/packages/list?%s", v.Encode()))
+		if err != nil {
+			utils.WriteError(w, r, fmt.Sprintf("failed to get package list: %s", err))
+			return
+		}
 
-	resp, err = http.Get(fmt.Sprintf("https://api.cl0udb0x.com/news/list"))
-	if err != nil {
-		utils.WriteError(w, r, fmt.Sprintf("failed to get news list: %s", err))
-		return
+		err = json.NewDecoder(resp.Body).Decode(&ents)
+		if err != nil {
+			utils.WriteError(w, r, fmt.Sprintf("failed to decode package list: %s", err))
+			return
+		}
+
+		v.Set("type", "weapon")
+		resp, err = http.Get(fmt.Sprintf("https://api.cl0udb0x.com/packages/list?%s", v.Encode()))
+		if err != nil {
+			utils.WriteError(w, r, fmt.Sprintf("failed to get package list: %s", err))
+			return
+		}
+
+		err = json.NewDecoder(resp.Body).Decode(&sweps)
+		if err != nil {
+			utils.WriteError(w, r, fmt.Sprintf("failed to decode package list: %s", err))
+			return
+		}
+
+		v.Set("type", "map")
+		resp, err = http.Get(fmt.Sprintf("https://api.cl0udb0x.com/packages/list?%s", v.Encode()))
+		if err != nil {
+			utils.WriteError(w, r, fmt.Sprintf("failed to get package list: %s", err))
+			return
+		}
+
+		err = json.NewDecoder(resp.Body).Decode(&maps)
+		if err != nil {
+			utils.WriteError(w, r, fmt.Sprintf("failed to decode package list: %s", err))
+			return
+		}
 	}
 
 	var news []common.NewsEntry
-	err = json.NewDecoder(resp.Body).Decode(&news)
-	if err != nil {
-		utils.WriteError(w, r, fmt.Sprintf("failed to decode news list: %s", err))
-		return
-	}
+	if pagetype == "home" || pagetype == "news" {
+		resp, err := http.Get(fmt.Sprintf("https://api.cl0udb0x.com/news/list"))
+		if err != nil {
+			utils.WriteError(w, r, fmt.Sprintf("failed to get news list: %s", err))
+			return
+		}
 
-	slices.Reverse(news)
+		err = json.NewDecoder(resp.Body).Decode(&news)
+		if err != nil {
+			utils.WriteError(w, r, fmt.Sprintf("failed to decode news list: %s", err))
+			return
+		}
+
+		slices.Reverse(news)
+	}
 
 	ingame := strings.Contains(r.UserAgent(), "Valve") || r.Host == "toybox.garrysmod.com" || r.Host == "ingame.cl0udb0x.com" || r.Host == "safe.cl0udb0x.com"
 
-	err = t.Execute(w, Home{
+	if pagetype == "error" {
+		w.WriteHeader(http.StatusNotFound)
+	}
+
+	err := t.Execute(w, Home{
 		InGame:       ingame,
 		GM13:         ingame && r.Host != "toybox.garrysmod.com",
 		LoggedIn:     steamid != nil,
 		HomePage:     true,
-		LatestNews:   news[0],
-		AllNews:      news,
+		PageType:     pagetype,
+		News:         news,
 		PopularENTs:  ents,
 		PopularSWEPs: sweps,
 		PopularMaps:  maps,

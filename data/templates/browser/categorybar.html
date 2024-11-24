@@ -1,7 +1,7 @@
 {{define "categorybar"}}
 <div class="navbar">
 	{{if or (not .InGame) (ne .Category "map") (.GM13)}}
-		<a href="/home" id="home"{{if .HomePage}} class="active"{{end}}><div class="navicon"></div><br>Home</a>
+		<a href="/home" id="home"{{if .HomePage}} class="active"{{end}}><div class="navicon"></div><br>Cloudbox</a>
 		{{if and (.InGame) (not .GM13)}}
 			<a href="/browse/mine" id="mine"{{if not .LoggedIn}} class="disabled"{{end}}{{if eq .Category "mine"}} class="active"{{end}}><div class="navicon"></div><br>Mine<br></a>
 		{{end}}

@@ -38,7 +38,7 @@ func main() {
 	http.Handle("GET /assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("data/assets"))))
 
 	// cloudbox pages
-	http.HandleFunc("GET /home", home.Handle)
+	http.HandleFunc("GET /{pagetype}", home.Handle)
 	http.HandleFunc("GET /browse/{category}", browser.Handle)
 	http.HandleFunc("GET /view/{id}", viewer.Handle)
 
@@ -49,7 +49,8 @@ func main() {
 	// redirects
 	http.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path != "/" { // there has to be a better way to do this
-			w.WriteHeader(http.StatusNotFound)
+			http.Redirect(w, r, "/error", http.StatusSeeOther)
+			//w.WriteHeader(http.StatusNotFound)
 			return
 		}
 

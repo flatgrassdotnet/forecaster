@@ -3,6 +3,8 @@ body {height: 100%; margin: 0px; font-family: Helvetica; color: #333; display: -
 a {color: #333; text-decoration: none;}
 a:hover {color: #FFF;}
 h1 {margin-left: 10px;}
+a.textlink {font-weight:bold;}
+a.textlink:hover {color: #4096ee;}
 
 .header {width: 100%; background-color: #4096ee; display: -webkit-box; overflow: hidden;}
 
@@ -15,8 +17,8 @@ h1 {margin-left: 10px;}
 .subbar span {margin-left: 20px;}
 .subbar .disabled {opacity: 0.25; pointer-events: none;}
 
-#home {background-image: url('/assets/rustmb/home.png');}
-#home:hover, #home.active {background-image: url('/assets/rustmb/home_hover.png');}
+#home {background-image: url('/assets/rustmb/cloudbox.png');}
+#home:hover, #home.active {background-image: url('/assets/rustmb/cloudbox_hover.png');}
 #mine {background-image: url('/assets/rustmb/mine.png');}
 #mine:hover, #mine.active {background-image: url('/assets/rustmb/mine_hover.png');}
 #entity {background-image: url('/assets/rustmb/entity.png');}
@@ -36,6 +38,15 @@ h1 {margin-left: 10px;}
 #next:hover {background-image: url('/assets/rustmb/rightarrow_hover.png')}
 #reroll {background-image: url('/assets/rustmb/reroll.png')}
 #reroll:hover {background-image: url('/assets/rustmb/reroll_hover.png')}
+
+#cloudbox {background-image: url('/assets/rustmb/cloudbox.png');}
+#cloudbox:hover, #cloudbox.active {background-image: url('/assets/rustmb/cloudbox_hover.png');}
+#pgFeatured {background-image: url('/assets/rustmb/featured.png');}
+#pgFeatured:hover, #pgFeatured.active {background-image: url('/assets/rustmb/featured_hover.png');}
+#pgNews {background-image: url('/assets/rustmb/news.png');}
+#pgNews:hover, #pgNews.active {background-image: url('/assets/rustmb/news_hover.png');}
+#pgInfo {background-image: url('/assets/rustmb/info.png');}
+#pgInfo:hover, #pgInfo.active {background-image: url('/assets/rustmb/info_hover.png');}
 
 #newest {background-image: url('/assets/rustmb/newest.png')}
 #newest:hover, #newest.active {background-image: url('/assets/rustmb/newest_hover.png')}
@@ -61,21 +72,23 @@ h1 {margin-left: 10px;}
 .savetools {padding: 16px 8px;}
 .savetools a {margin: 8px; font-weight: bolder;}
 
-.content {padding: 16px 8px; overflow-y: auto; background-color: #B8E3FF; -webkit-box-flex: 1; padding-bottom: 160px;}
+.content {padding: 16px 8px; overflow-y: auto; background-color: #B8E3FF; -webkit-box-flex: 1; padding-bottom: 160px; scrollbar-color: #4096ee white;}
 
 .pillbox {background: white; -webkit-border-radius: 14px; padding: 5px 10px; overflow: hidden; margin-left: auto; margin-right: auto; width: 90%;}
 .pillbox:not(:last-child) {margin-bottom: 6px;}
 
 .pillbox h2, .pillbox h3, .pillbox h4 {color: #4096ee; margin: 0; margin-bottom: 6px;}
-.pillbox sub {font-style: italic; margin-left: 10px;}
+.pillbox sub {font-style: italic; margin-left: 10px; color:#333; font-weight:normal; vertical-align:baseline;}
 .pillbox div.newsformat {margin: 13px 0px; font-size: 13px; white-space: pre-line;}
 
-#lessnews-toggle, #morenews-toggle {float:right; background-color: #4096ee; color: white; border:2px solid #333; -webkit-border-radius: 3px; padding: 3px 6px; font-size: 13px; font-weight: bold; cursor: pointer;}
+a.morelink {width:22px; height:1em; display:inline-block; margin-left:2px; vertical-align:sub; background-size:contain; background-position:center; background-repeat:no-repeat; background-image:url("/assets/rustmb/link.png");}
+a.morelink:hover {background-image:url("/assets/rustmb/link_hover.png");}
+
+#lessnews-toggle, #morenews-toggle {float:right; background-color: #4096ee; color: white; border:2px solid #333; -webkit-border-radius: 3px; padding: 3px 6px; font-size: 13px; font-weight: bold;}
 #lessnews-toggle:hover, #morenews-toggle:hover {background-color: #b8e3ff; color: #333;}
 #lessnews-toggle:focus, #morenews-toggle:focus {background-color: #b8e3ff; color: #333;}
 #lessnews-toggle img, #morenews-toggle img {width:46px;}
 
-#morenews {max-height: 80%; overflow: auto;}
 #morenews > div:not(:last-child) {border-bottom: 1px dotted lightgray;}
 
 

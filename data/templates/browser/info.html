@@ -1,0 +1,34 @@
+{{define "info"}}
+<div class="pillbox">
+	<h2>Content</h2>
+	<h4>Can I add Toybox content?</h4>
+	<p>Have any old installs of Garry's Mod lying around? If it's from 2010 to 2012, there's a good chance it has valuable cached Toybox creations we can use to revive more of Toybox. Add Pancakes on {{if .InGame}}Steam (/id/keroronpa){{else}}<a class="textlink" href="https://steamcommunity.com/id/keroronpa" target="_blank">Steam</a>{{end}} or Discord (@keroronpa), you can help us make our archive even better.</p>
+	<h4>What about new content?</h4>
+	<p>At the moment we're focused on recovering Toybox uploads (see above)</p>
+</div>
+<div class="pillbox">
+	<h2>Garry's Mod 13</h2>
+	<h4>How to use</h4>
+	<p>Subscribe to the Cloudbox addon on the Garry's Mod Workshop. If you're seeing this in-game, you've already subscribed!</p>
+	<h4>Compatibility and Bugs</h4>
+	<p>Almost all of the content on Cloudbox is from 2010-2012, scripts may not fully work because of updates. We're actively developing a compatibility layer and releasing improvements often. See the News page for updates.</p>
+	<h4>Commands</h4>
+	<p>You can easily tweak Cloudbox's behavior using console commands.<br/>
+		<code>cloudbox_userchangelevel</code> - Allow non-admins to changelevel to Cloudbox maps<br/>
+		<code>cloudbox_adminonly</code> - Only allow admins to download from Cloudbox<br/>
+		<code>cloudbox_showjoinmessage</code> - Show Cloudbox chat message on join<br/>
+		<code>cloudbox_getpackage</code> - Download a package from Cloudbox by ID and (optionally) revision<br/>
+		<code>cloudbox_purgecache</code> - Purge the Cloudbox downloads cache
+	</p>
+</div>
+<div class="pillbox">
+	<h2>Garry's Mod 12</h2>
+	<h4>How to use</h4>
+	<p>If you still have a copy of Garry's Mod 12, you can use Cloudbox in-place of the discontinued Toybox. You'll need to edit your HOSTS file (<code>C:\Windows\System32\Drivers\etc\hosts</code>) and add these lines to the end of it:<br/>
+		<code>51.81.34.116 api.garrysmod.com<br/>
+		51.81.34.116 stats.garrysmod.com<br/>
+		51.81.34.116 toybox.garrysmod.com<br/>
+		51.81.34.116 toyboxapi.garrysmod.com</code>
+	</p>
+</div>
+{{end}}

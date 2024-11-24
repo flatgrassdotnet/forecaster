@@ -22,7 +22,19 @@
 		<div class="topclouds" {{if .GM13}}style="opacity: 0;"{{end}}></div>
 		{{if .HomePage}}
 			<div class="content" style="padding-top:0">
-				{{template "home" .}}
+				{{if eq .PageType "home"}}
+					{{template "home" .}}
+				{{else if eq .PageType "news"}}
+					{{template "news" .}}
+				{{else if eq .PageType "info"}}
+					{{template "info" .}}
+				{{else if eq .PageType "error"}}
+					<div class="pillbox">
+						<h2>Page Not Found (404)</h2>
+						<p>URL does not exist :(</p>
+						<p>(Sad mascot would go here)</p>
+					</div>
+				{{end}}
 			</div>
 		{{else}}
 			<div class="content" style="text-align:center;">
