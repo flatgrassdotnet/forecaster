@@ -8,61 +8,43 @@ a.textlink:hover {color: #4096ee;}
 
 .header {width: 100%; background-color: #4096ee; display: -webkit-box; overflow: hidden;}
 
-.navbar a {width: 64px; height: 50px; float: left; overflow: hidden; font-size: 11px; text-align: center; margin-top: 10px; margin-left: 4px; font-weight: bolder; text-decoration: none; background-size: contain; background-size: 32px 32px; background-repeat: no-repeat; background-position: center 0px;}
-.navbar .navicon {width: 32px; height: 32px; margin-bottom: 2px; display: inline-block;}
+.navbar a {width: 64px; height: 50px; float: left; overflow: hidden; font-size: 11px; text-align: center; margin-top: 10px; margin-left: 4px; font-weight: bolder; text-decoration: none; }
+.navbar .navicon {width: 32px; height: 32px; margin-bottom: 2px; display: inline-block; background-size: cover; background-repeat: no-repeat; background-position: 0px 0px;}
+.navbar a:hover .navicon, .navbar a.active .navicon {background-position:-32px 0px;}
 .navbar .disabled {opacity: 0.25; pointer-events: none;}
 
 .subbar {margin-left: 12px;}
-.subbar a {float: left; font-size: 16px; margin-right: 12px; margin-top: 4px; margin-bottom: 4px; font-weight: bolder; text-decoration: none; background-repeat: no-repeat; background-size: contain; height: 16px;}
-.subbar span {margin-left: 20px;}
+.subbar a {float: left; font-size: 16px; margin-right: 12px; margin-top: 4px; margin-bottom: 4px; font-weight: bolder; text-decoration: none; height: 16px;}
+.subbar .navicon {width: 16px; height: 16px; display: inline-block; background-size: cover; background-repeat: no-repeat; background-position: 0px 0px; margin-right:4px;}
+.subbar a:hover .navicon, .subbar a.active .navicon {background-position:-16px 0px;}
+.subbar span:not(.navicon) {vertical-align:top;}
 .subbar .disabled {opacity: 0.25; pointer-events: none;}
 
-#home {background-image: url('/assets/rustmb/cloudbox.png');}
-#home:hover, #home.active {background-image: url('/assets/rustmb/cloudbox_hover.png');}
-#mine {background-image: url('/assets/rustmb/mine.png');}
-#mine:hover, #mine.active {background-image: url('/assets/rustmb/mine_hover.png');}
-#entity {background-image: url('/assets/rustmb/entity.png');}
-#entity:hover, #entity.active {background-image: url('/assets/rustmb/entity_hover.png');}
-#weapon {background-image: url('/assets/rustmb/weapon.png');}
-#weapon:hover, #weapon.active {background-image: url('/assets/rustmb/weapon_hover.png');}
-#prop {background-image: url('/assets/rustmb/prop.png');}
-#prop:hover, #prop.active {background-image: url('/assets/rustmb/prop_hover.png');}
-#savemap {background-image: url('/assets/rustmb/savemap.png');}
-#savemap:hover, #savemap.active {background-image: url('/assets/rustmb/savemap_hover.png');}
-#map {background-image: url('/assets/rustmb/map.png');}
-#map:hover, #map.active {background-image: url('/assets/rustmb/map_hover.png');}
+#home .navicon {background-image: url('/assets/rustmb/combined/cloudbox.png');}
+#mine .navicon {background-image: url('/assets/rustmb/combined/mine.png');}
+#entity .navicon {background-image: url('/assets/rustmb/combined/entity.png');}
+#weapon .navicon {background-image: url('/assets/rustmb/combined/weapon.png');}
+#prop .navicon {background-image: url('/assets/rustmb/combined/prop.png');}
+#savemap .navicon {background-image: url('/assets/rustmb/combined/savemap.png');}
+#map .navicon {background-image: url('/assets/rustmb/combined/map.png');}
 
-#prev {background-image: url('/assets/rustmb/leftarrow.png')}
-#prev:hover {background-image: url('/assets/rustmb/leftarrow_hover.png')}
-#next {background-image: url('/assets/rustmb/rightarrow.png')}
-#next:hover {background-image: url('/assets/rustmb/rightarrow_hover.png')}
-#reroll {background-image: url('/assets/rustmb/reroll.png')}
-#reroll:hover {background-image: url('/assets/rustmb/reroll_hover.png')}
+#prev .navicon {background-image: url('/assets/rustmb/combined/leftarrow.png')}
+#next .navicon {background-image: url('/assets/rustmb/combined/rightarrow.png')}
+#reroll .navicon {background-image: url('/assets/rustmb/combined/reroll.png')}
 
-#cloudbox {background-image: url('/assets/rustmb/cloudbox.png');}
-#cloudbox:hover, #cloudbox.active {background-image: url('/assets/rustmb/cloudbox_hover.png');}
-#pgFeatured {background-image: url('/assets/rustmb/featured.png');}
-#pgFeatured:hover, #pgFeatured.active {background-image: url('/assets/rustmb/featured_hover.png');}
-#pgNews {background-image: url('/assets/rustmb/news.png');}
-#pgNews:hover, #pgNews.active {background-image: url('/assets/rustmb/news_hover.png');}
-#pgInfo {background-image: url('/assets/rustmb/info.png');}
-#pgInfo:hover, #pgInfo.active {background-image: url('/assets/rustmb/info_hover.png');}
+#cloudbox .navicon {background-image: url('/assets/rustmb/combined/cloudbox.png');}
+#pgFeatured .navicon {background-image: url('/assets/rustmb/combined/featured.png');}
+#pgNews .navicon {background-image: url('/assets/rustmb/combined/news.png');}
+#pgInfo .navicon {background-image: url('/assets/rustmb/combined/info.png');}
 
-#newest {background-image: url('/assets/rustmb/newest.png')}
-#newest:hover, #newest.active {background-image: url('/assets/rustmb/newest_hover.png')}
-#random {background-image: url('/assets/rustmb/random.png')}
-#random:hover, #random.active {background-image: url('/assets/rustmb/random_hover.png')}
-#mostfavs {background-image: url('/assets/rustmb/mostfavs.png')}
-#mostfavs:hover, #mostfavs.active {background-image: url('/assets/rustmb/mostfavs_hover.png')}
-#mostlikes {background-image: url('/assets/rustmb/mostlikes.png')}
-#mostlikes:hover, #mostlikes.active {background-image: url('/assets/rustmb/mostlikes_hover.png')}
-#mostdls {background-image: url('/assets/rustmb/mostdls.png')}
-#mostdls:hover, #mostdls.active {background-image: url('/assets/rustmb/mostdls_hover.png')}
+#newest .navicon {background-image: url('/assets/rustmb/combined/newest.png')}
+#random .navicon {background-image: url('/assets/rustmb/combined/random.png')}
+#mostfavs .navicon {background-image: url('/assets/rustmb/combined/mostfavs.png')}
+#mostlikes .navicon {background-image: url('/assets/rustmb/combined/mostlikes.png')}
+#mostdls .navicon {background-image: url('/assets/rustmb/combined/mostdls.png')}
 
-#uploadsave {background-image: url('/assets/rustmb/uploadsave.png')}
-#uploadsave:hover {background-image: url('/assets/rustmb/uploadsave_hover.png')}
-#cleanup {background-image: url('/assets/rustmb/cleanup.png')}
-#cleanup:hover {background-image: url('/assets/rustmb/cleanup_hover.png')}
+#uploadsave .navicon {background-image: url('/assets/rustmb/combined/uploadsave.png')}
+#cleanup .navicon {background-image: url('/assets/rustmb/combined/cleanup.png')}
 
 .search {padding: 16px; padding-bottom: 0px;}
 .search #searchbox {width: 100%; padding: 5px; border: 2px solid; border-color: #595959; border-radius: 4px;}
@@ -81,8 +63,10 @@ a.textlink:hover {color: #4096ee;}
 .pillbox sub {font-style: italic; margin-left: 10px; color:#333; font-weight:normal; vertical-align:baseline;}
 .pillbox div.newsformat {margin: 13px 0px; font-size: 13px; white-space: pre-line;}
 
-a.morelink {width:22px; height:1em; display:inline-block; margin-left:2px; vertical-align:sub; background-size:contain; background-position:center; background-repeat:no-repeat; background-image:url("/assets/rustmb/link.png");}
-a.morelink:hover {background-image:url("/assets/rustmb/link_hover.png");}
+a.morelink {width:16px; height:16px; display:inline-block; margin-left:2px; vertical-align:sub; background-size:cover; background-position:0px 0px; background-repeat:no-repeat; background-image:url("/assets/rustmb/combined/link.png");}
+a.morelink:hover {background-position:-16px 0px;}
+a.morelink.large {width:22px; height:22px;}
+a.morelink.large:hover {background-position:-22px 0px;}
 
 
 #morenews > div:not(:last-child) {border-bottom: 1px dotted lightgray;}

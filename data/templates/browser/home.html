@@ -1,6 +1,6 @@
 {{define "home"}}
 <div class="pillbox" id="lessnews">
-	<h2>What's New? <a class="morelink" href="/news"></a></h2>
+	<h2>What's New? <a class="morelink large" href="/news"></a></h2>
 	
 	<h4>{{(index .News 0).Title}} <sub>by <b>{{(index .News 0).Author}}</b> - {{(index .News 0).Time.Format "02 January 2006, 3:04 pm (UTC)"}}</sub></h4>
 	<div class="newsformat">{{(index .News 0).Body}}</div>
