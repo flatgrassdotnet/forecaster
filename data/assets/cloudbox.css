@@ -56,12 +56,13 @@ a.textlink:hover {color: #4096ee;}
 
 .content {padding: 16px 8px; overflow-y: auto; background-color: #B8E3FF; -webkit-box-flex: 1; padding-bottom: 160px; scrollbar-color: #4096ee white;}
 
-.pillbox {background: white; -webkit-border-radius: 14px; padding: 5px 10px; overflow: hidden; margin-left: auto; margin-right: auto; width: 90%;}
+.pillbox {background: white; -webkit-border-radius: 14px; border-radius:14px; padding: 5px 10px; overflow: hidden; margin-left: auto; margin-right: auto; width: 92%; box-sizing: border-box;}
 .pillbox:not(:last-child) {margin-bottom: 6px;}
+.pillbox.thin {display: inline-block; margin-left: 4%; width: auto; max-width: 92%;}
 
-.pillbox h2, .pillbox h3, .pillbox h4 {color: #4096ee; margin: 0; margin-bottom: 6px;}
+.pillbox h2, .pillbox h3, .pillbox h4 {color: #4096ee; margin: 0; margin-bottom: 6px; margin-top: 3px;}
 .pillbox sub {font-style: italic; margin-left: 10px; color:#333; font-weight:normal; vertical-align:baseline;}
-.pillbox div.newsformat {margin: 13px 0px; font-size: 13px; white-space: pre-line;}
+.pillbox div.newsformat {margin: 13px 0px; margin-bottom: 6px; font-size: 13px; white-space: pre-line;}
 
 a.morelink {width:16px; height:16px; display:inline-block; margin-left:2px; vertical-align:sub; background-size:cover; background-position:0px 0px; background-repeat:no-repeat; background-image:url("/assets/rustmb/combined/link.png");}
 a.morelink:hover {background-position:-16px 0px;}
@@ -69,7 +70,7 @@ a.morelink.large {width:22px; height:22px;}
 a.morelink.large:hover {background-position:-22px 0px;}
 
 
-#morenews > div:not(:last-child) {border-bottom: 1px dotted lightgray;}
+#morenews > div:not(:last-child) {border-bottom: 1px solid #b8e3ff;}
 
 
 .item {width: 128px; height: 125px; margin-left: 2px; margin-right: 2px; display: inline-block; cursor: pointer;}
@@ -105,7 +106,7 @@ a.morelink.large:hover {background-position:-22px 0px;}
 .metabox .meta-info .meta-user img {width: 48px; height: 48px; float: left;}
 .metabox .meta-info .meta-user .meta-uploaded, .metabox .meta-info .meta-user .meta-username {font-size: 13px; margin-left: 48px; padding-left: 8px; line-height: 24px;}
 
-.metabox .meta-desc {background: rgba(184, 227, 255, 0.6); padding: 10px; font-size: 15px; border-radius: 8px; width: 100%;}
+.metabox .meta-desc {background: rgba(184, 227, 255, 0.6); padding: 10px; font-size: 15px; border-radius: 8px; width: 100%; white-space: collapse;}
 
 .saveform {padding: 16px 8px;}
 .saveform label {display: block;}
