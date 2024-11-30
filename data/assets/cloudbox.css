@@ -5,6 +5,7 @@ a:hover {color: #FFF;}
 h1 {margin-left: 10px;}
 a.textlink {font-weight:bold;}
 a.textlink:hover {color: #4096ee;}
+form {margin-bottom: 0px}
 
 .header {width: 100%; background-color: #4096ee; display: -webkit-box; overflow: hidden;}
 
