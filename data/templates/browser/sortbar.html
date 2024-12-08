@@ -1,15 +1,15 @@
 {{define "sortbar"}}
 <div class="subbar">
 	{{if .HomePage}}
-		<a href="/home" id="pgFeatured"{{if eq .PageType "home"}} class="active"{{end}}><span class='navicon'></span><span>Featured</span></a>
-		<a href="/news" id="pgNews"{{if eq .PageType "news"}} class="active"{{end}}><span class='navicon'></span><span>News</span></a>
-		<a href="/info" id="pgInfo"{{if eq .PageType "info"}} class="active"{{end}}><span class='navicon'></span><span>Info/Help</span></a>
+		<a href="/home" id="pgFeatured"{{if eq .PageType "home"}} class="active"{{end}}><span class="navicon"></span><span>Featured</span></a>
+		<a href="/news" id="pgNews"{{if eq .PageType "news"}} class="active"{{end}}><span class="navicon"></span><span>News</span></a>
+		<a href="/info" id="pgInfo"{{if eq .PageType "info"}} class="active"{{end}}><span class="navicon"></span><span>Info/Help</span></a>
 	{{else}}
-		<a href="?sort=random" id="random"{{if or (eq .Sort "random") (eq .Sort "")}} class="active"{{end}}><span class='navicon'></span><span>Random</span></a>
-		<a href="?sort=newest" id="newest"{{if eq .Sort "newest"}} class="active"{{end}}><span class='navicon'></span><span>Newest</span></a>
-		<a href="?sort=mostfavs" id="mostfavs"{{if eq .Sort "mostfavs"}} class="active"{{end}}><span class='navicon'></span><span>Most Favorite</span></a>
-		<a href="?sort=mostlikes" id="mostlikes"{{if eq .Sort "mostlikes"}} class="active"{{end}}><span class='navicon'></span><span>Most Liked</span></a>
-		<a href="?sort=mostdls" id="mostdls"{{if eq .Sort "mostdls"}} class="active"{{end}}><span class='navicon'></span><span>Most Used</span></a>
+		<a href="?sort=random" id="random"{{if or (eq .Sort "random") (eq .Sort "")}} class="active"{{end}}><span class="navicon"></span><span>Random</span></a>
+		<a href="?sort=newest" id="newest"{{if eq .Sort "newest"}} class="active"{{end}}><span class="navicon"></span><span>Newest</span></a>
+		<a href="?sort=mostfavs" id="mostfavs"{{if eq .Sort "mostfavs"}} class="active"{{end}}><span class="navicon"></span><span>Most Favorite</span></a>
+		<a href="?sort=mostlikes" id="mostlikes"{{if eq .Sort "mostlikes"}} class="active"{{end}}><span class="navicon"></span><span>Most Liked</span></a>
+		<a href="?sort=mostdls" id="mostdls"{{if eq .Sort "mostdls"}} class="active"{{end}}><span class="navicon"></span><span>Most Used</span></a>
 	{{end}}
 </div>
 {{end}}

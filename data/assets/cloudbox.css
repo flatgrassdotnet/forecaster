@@ -47,6 +47,9 @@ form {margin-bottom: 0px}
 #uploadsave .navicon {background-image: url('/assets/rustmb/combined/uploadsave.png')}
 #cleanup .navicon {background-image: url('/assets/rustmb/combined/cleanup.png')}
 
+#settings {cursor:pointer;}
+#settings .navicon {background-image:url('/assets/rustmb/combined/find.png')}
+
 .search {padding: 16px; padding-bottom: 0px;}
 .search #searchbox {width: 100%; padding: 5px; border: 2px solid; border-color: #595959; border-radius: 4px;}
 

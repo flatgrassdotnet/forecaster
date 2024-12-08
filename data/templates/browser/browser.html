@@ -17,7 +17,9 @@
 			{{if and (.InGame) (eq .Category "savemap")}}
 				{{template "savetools" .}}
 			{{end}}
-			</div>
+			<div class="subbar" style="margin-left:auto;">
+				{{if .GM13}}<a id="settings" onclick="cloudbox.OpenSettings()"><span class="navicon"></span><span>Options</span></a>{{end}}
+	 		</div>
 		</div>
 		<div class="topclouds" {{if .GM13}}style="visibility:hidden; opacity: 0;animation-play-state:paused; -webkit-animation-play-state: paused;"{{end}}></div>
 		{{if .HomePage}}
