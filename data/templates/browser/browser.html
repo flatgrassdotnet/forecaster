@@ -41,10 +41,10 @@
 			{{if and (.InGame) (eq .Category "savemap")}}
 				{{template "savetools" .}}
 			{{end}}
-			<div class="subbar" style="margin-left:auto;margin-right: 52px;">
-				<a id="togglemode" onclick="toggleMode();" title="Toggle Light/Dark Mode"><span class='navicon'></span></a>
+			<div class="subbar" style="margin-left:auto; margin-right: 52px;">
+				<a id="togglemode" onclick="toggleMode()" title="Toggle Light/Dark Mode"><span class="navicon"></span></a>
 				{{if .GM13}}
-					<a id="settings" onclick='cloudbox.OpenSettings();'><span class='navicon'></span><span>Options</span></a>
+					<a id="settings" onclick="cloudbox.OpenSettings()"><span class="navicon"></span><span>Options</span></a>
 				{{end}}
 			</div>
 		</div>
