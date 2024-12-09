@@ -27,6 +27,7 @@ import (
 	"github.com/flatgrassdotnet/forecaster/ingame/browser"
 	"github.com/flatgrassdotnet/forecaster/ingame/home"
 	"github.com/flatgrassdotnet/forecaster/ingame/publishsave"
+	"github.com/flatgrassdotnet/forecaster/ingame/svg"
 	"github.com/flatgrassdotnet/forecaster/ingame/viewer"
 )
 
@@ -41,6 +42,7 @@ func main() {
 	http.HandleFunc("GET /{pagetype}", home.Handle)
 	http.HandleFunc("GET /browse/{category}", browser.Handle)
 	http.HandleFunc("GET /view/{id}", viewer.Handle)
+	http.HandleFunc("GET /svg/{id}", svg.Handle)
 
 	// toybox.garrysmod.com
 	http.HandleFunc("GET /API/publishsave_002/", publishsave.Get)

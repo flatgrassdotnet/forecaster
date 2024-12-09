@@ -2,7 +2,31 @@
 	<head>
 		<title>Cloudbox</title>
 		<link rel="stylesheet" href="/assets/cloudbox.css" type="text/css">
+		<link id="darkmode" rel="stylesheet" href="/assets/cloudbox-dark.css" type="text/css"{{if not .IsDarkMode}}disabled{{end}}>
 		{{if not .GM13}}<script>var cloudbox = {}; cloudbox.GetPackage = function (type, id, rev) {window.location = "garrysmod://" + (type === "map" ? "install" : "spawn") + "/" + type + "/" + id + "/" + rev;}</script>{{end}}
+		<script>
+			var darkMode = {{.IsDarkMode}};
+			function toggleMode() {
+				darkMode = !darkMode;
+				document.cookie = "darkmode="+darkMode+"; Path=/";
+				if (darkMode) {
+					document.getElementById("darkmode").removeAttribute("disabled");
+				} else {
+					document.getElementById("darkmode").setAttribute("disabled","disabled");
+				}
+				{{if .GM13}}
+					cloudbox.ToggleDarkMode(darkMode);
+				{{end}}
+			}
+			{{if .GM13}} 
+				function forceMode(mode) {
+					darkMode = !mode;
+					toggleMode();
+				}
+				
+				cloudbox.ToggleDarkMode(darkMode);
+			{{end}}
+		</script>
 	</head>
 	<body>
 		<div class="header">
@@ -12,14 +36,17 @@
 				{{template "pagenav" .}}
 			{{end}}
 		</div>
-		<div class="header" style="padding-bottom: 2px">
+		<div class="header" style="padding-bottom:2px">
 			{{template "sortbar" .}}
 			{{if and (.InGame) (eq .Category "savemap")}}
 				{{template "savetools" .}}
 			{{end}}
-			<div class="subbar" style="margin-left:auto;">
-				{{if .GM13}}<a id="settings" onclick="cloudbox.OpenSettings()"><span class="navicon"></span><span>Options</span></a>{{end}}
-	 		</div>
+			<div class="subbar" style="margin-left:auto;margin-right: 52px;">
+				<a id="togglemode" onclick="toggleMode();" title="Toggle Light/Dark Mode"><span class='navicon'></span></a>
+				{{if .GM13}}
+					<a id="settings" onclick='cloudbox.OpenSettings();'><span class='navicon'></span><span>Options</span></a>
+				{{end}}
+			</div>
 		</div>
 		<div class="topclouds" {{if .GM13}}style="visibility:hidden; opacity: 0;animation-play-state:paused; -webkit-animation-play-state: paused;"{{end}}></div>
 		{{if .HomePage}}

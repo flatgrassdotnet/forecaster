@@ -39,6 +39,7 @@ type Home struct {
 	LoggedIn     bool
 	HomePage     bool
 	PageType     string
+	IsDarkMode   bool
 	MapName      string
 	Search       string
 	Sort         string
@@ -87,6 +88,14 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			utils.WriteError(w, r, fmt.Sprintf("failed to read steamid: %s", err))
 			return
+		}
+	}
+
+	var darkmode bool
+	darkCookie, err := r.Cookie("darkmode")
+	if err == nil {
+		if darkCookie.Value == "true" {
+			darkmode = true
 		}
 	}
 
@@ -165,12 +174,13 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusNotFound)
 	}
 
-	err := t.Execute(w, Home{
+	err = t.Execute(w, Home{
 		InGame:       ingame,
 		GM13:         ingame && r.Host != "toybox.garrysmod.com",
 		LoggedIn:     steamid != nil,
 		HomePage:     true,
 		PageType:     pagetype,
+		IsDarkMode:   darkmode,
 		News:         news,
 		PopularENTs:  ents,
 		PopularSWEPs: sweps,

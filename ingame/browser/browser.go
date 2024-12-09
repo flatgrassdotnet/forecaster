@@ -34,17 +34,18 @@ import (
 )
 
 type Browser struct {
-	InGame   bool
-	GM13     bool
-	LoggedIn bool
-	HomePage bool
-	MapName  string
-	Search   string
-	Sort     string
-	Category string
-	Packages []common.Package
-	PrevLink string
-	NextLink string
+	InGame     bool
+	GM13       bool
+	LoggedIn   bool
+	HomePage   bool
+	IsDarkMode bool
+	MapName    string
+	Search     string
+	Sort       string
+	Category   string
+	Packages   []common.Package
+	PrevLink   string
+	NextLink   string
 }
 
 const itemsPerPage = 50
@@ -88,6 +89,14 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			utils.WriteError(w, r, fmt.Sprintf("failed to read steamid: %s", err))
 			return
+		}
+	}
+
+	var darkmode bool
+	darkCookie, err := r.Cookie("darkmode")
+	if err == nil {
+		if darkCookie.Value == "true" {
+			darkmode = true
 		}
 	}
 
@@ -141,16 +150,17 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 	ingame := strings.Contains(r.UserAgent(), "Valve") || r.Host == "toybox.garrysmod.com" || r.Host == "ingame.cl0udb0x.com" || r.Host == "safe.cl0udb0x.com"
 
 	err = t.Execute(w, Browser{
-		InGame:   ingame,
-		GM13:     ingame && r.Host != "toybox.garrysmod.com",
-		LoggedIn: steamid != nil,
-		MapName:  r.Header.Get("MAP"),
-		Search:   r.URL.Query().Get("search"),
-		Sort:     sort,
-		Category: category,
-		Packages: list,
-		PrevLink: prev,
-		NextLink: next,
+		InGame:     ingame,
+		GM13:       ingame && r.Host != "toybox.garrysmod.com",
+		LoggedIn:   steamid != nil,
+		IsDarkMode: darkmode,
+		MapName:    r.Header.Get("MAP"),
+		Search:     r.URL.Query().Get("search"),
+		Sort:       sort,
+		Category:   category,
+		Packages:   list,
+		PrevLink:   prev,
+		NextLink:   next,
 	})
 	if err != nil {
 		utils.WriteError(w, r, fmt.Sprintf("failed to execute template: %s", err))
