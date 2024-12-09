@@ -66,7 +66,6 @@ var (
 )
 
 func Handle(w http.ResponseWriter, r *http.Request) {
-
 	pagetype, ok := pagetypes[r.PathValue("pagetype")]
 	if !ok {
 		http.Error(w, "unknown page", http.StatusNotFound)
@@ -94,9 +93,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 	var darkmode bool
 	darkCookie, err := r.Cookie("darkmode")
 	if err == nil {
-		if darkCookie.Value == "true" {
-			darkmode = true
-		}
+		darkmode = darkCookie.Value == "true"
 	}
 
 	v := make(url.Values)
@@ -169,10 +166,6 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ingame := strings.Contains(r.UserAgent(), "Valve") || r.Host == "toybox.garrysmod.com" || r.Host == "ingame.cl0udb0x.com" || r.Host == "safe.cl0udb0x.com"
-
-	if pagetype == "error" {
-		w.WriteHeader(http.StatusNotFound)
-	}
 
 	err = t.Execute(w, Home{
 		InGame:       ingame,

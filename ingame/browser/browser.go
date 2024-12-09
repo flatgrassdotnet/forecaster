@@ -95,9 +95,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 	var darkmode bool
 	darkCookie, err := r.Cookie("darkmode")
 	if err == nil {
-		if darkCookie.Value == "true" {
-			darkmode = true
-		}
+		darkmode = darkCookie.Value == "true"
 	}
 
 	v := make(url.Values)

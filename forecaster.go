@@ -52,7 +52,6 @@ func main() {
 	http.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path != "/" { // there has to be a better way to do this
 			http.Redirect(w, r, "/error", http.StatusSeeOther)
-			//w.WriteHeader(http.StatusNotFound)
 			return
 		}
 
