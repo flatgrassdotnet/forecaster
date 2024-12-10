@@ -25,9 +25,9 @@ a.textlink:hover {color: #1a9fff;}
 .item:hover .thumb {border-color: #66C0F4}
 .item:hover .name {color: #66C0F4;}
 
-.item .info {background-color: rgba(0, 0, 0, 0.9);}
+.item .info {background-color: rgba(66, 87, 106, 0.9);}
 
-.item .info .clouds {background-image:url("/svg/clouds?fill=000000")} 
+.item .info .clouds {background-image: url("/svg/clouds?fill=42576A")} 
 
 .metabox .meta-thumb .img {border-color: #969696; }
 
@@ -38,7 +38,7 @@ a.textlink:hover {color: #1a9fff;}
 
 .saveform input {border-color: #969696;}
 
-.bottomclouds {background-image:url("/svg/clouds?fill=000000")}
+.bottomclouds {background-image: url("/svg/clouds?fill=B8E3FF")}
 
 ::-webkit-scrollbar {background-color: #1a9fff; }
 ::-webkit-scrollbar-button, ::-webkit-scrollbar-thumb {background-color: #273b52; border-color: #969696;}
