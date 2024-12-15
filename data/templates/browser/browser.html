@@ -18,6 +18,7 @@
 					cloudbox.ToggleDarkMode(darkMode);
 				{{end}}
 			}
+
 			{{if .GM13}} 
 				function forceMode(mode) {
 					darkMode = !mode;
@@ -48,7 +49,12 @@
 				{{end}}
 			</div>
 		</div>
-		<div class="topclouds" {{if .GM13}}style="visibility:hidden; opacity: 0;animation-play-state:paused; -webkit-animation-play-state: paused;"{{end}}></div>
+		<div class="topclouds"></div>
+		<script>
+			var animationTime = new Date();
+			animationTimeTop = "-" + (animationTime.getSeconds() % 10) + "." + animationTime.getMilliseconds() + "s";
+			document.querySelector(".topclouds").setAttribute("style", "-webkit-animation-delay: "+animationTimeTop+"; animation-delay: "+animationTimeTop+";");
+		</script>
 		{{if .HomePage}}
 			<div class="content" style="padding-top:0">
 				{{if eq .PageType "home"}}
@@ -75,6 +81,10 @@
 				{{end}}
 			</div>
 		{{end}}
-	</body>
-	<div class="bottomclouds"></div>
+		<div class="bottomclouds"></div>
+		<script>
+			animationTimeBottom = "-" + (animationTime.getSeconds() % 5) + "." + animationTime.getMilliseconds() + "s";
+			document.querySelector(".bottomclouds").setAttribute("style", "-webkit-animation-delay: "+animationTimeBottom+"; animation-delay: "+animationTimeBottom+";");
+		</script>
+	</body>	
 </html>
