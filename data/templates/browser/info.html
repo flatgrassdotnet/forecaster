@@ -9,11 +9,11 @@
 <div class="pillbox">
 	<h2>Garry's Mod 13</h2>
 	<h4>How to use</h4>
-	<p>Subscribe to the Cloudbox addon on the Garry's Mod Workshop. If you're seeing this in-game, you've already subscribed!</p>
+	<p>Subscribe to the {{if not .InGame}}<a class="textlink" href="https://steamcommunity.com/sharedfiles/filedetails/?id=3365311511" target="_blank">Cloudbox addon</a>{{else}}Cloudbox addon{{end}} on the Garry's Mod Workshop. {{if .GM13}}If you're seeing this in-game, you've already subscribed!{{end}}</p>
 	<h4>Compatibility and Bugs</h4>
-	<p>Almost all of the content on Cloudbox is from 2010-2012, scripts may not fully work because of updates. We're actively developing a compatibility layer and releasing improvements often. See the News page for updates.</p>
+	<p>Almost all of the content on Cloudbox is from 2010-2012, scripts may not fully work because of updates. We're actively developing a compatibility layer and releasing improvements often. See the <a class="textlink" href="/news">News</a> page for updates.</p>
 	<h4>Commands</h4>
-	<p>You can easily tweak Cloudbox's behavior using console commands.<br/>
+	<p>You can easily tweak Cloudbox's behavior using {{if .GM13}}<a id="inline-options" class="textlink" onclick="cloudbox.OpenSettings()"><span></span>Options</a> (user/server){{else}}in-game Options{{end}}, or console commands.<br/>
 		<code>cloudbox_userchangelevel</code> - Allow non-admins to changelevel to Cloudbox maps<br/>
 		<code>cloudbox_adminonly</code> - Only allow admins to download from Cloudbox<br/>
 		<code>cloudbox_showjoinmessage</code> - Show Cloudbox chat message on join<br/>
@@ -24,7 +24,7 @@
 <div class="pillbox">
 	<h2>Garry's Mod 12</h2>
 	<h4>How to use</h4>
-	<p>If you still have a copy of Garry's Mod 12, you can use Cloudbox in-place of the discontinued Toybox. You'll need to edit your HOSTS file (<code>C:\Windows\System32\Drivers\etc\hosts</code>) and add these lines to the end of it:<br/>
+	<p>If you still have a copy of Garry's Mod 12, you can use Cloudbox in-place of the discontinued Toybox. You'll need to edit your HOSTS file (<code>C:\Windows\System32\Drivers\etc\hosts</code>) as admin and add these lines to the end of it:<br/>
 		<code>51.81.34.116 api.garrysmod.com<br/>
 		51.81.34.116 stats.garrysmod.com<br/>
 		51.81.34.116 toybox.garrysmod.com<br/>

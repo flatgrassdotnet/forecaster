@@ -1,6 +1,10 @@
+<!doctype html>
 <html>
 	<head>
 		<title>Cloudbox</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="theme-color" content="#4096ee">
 		<link rel="stylesheet" href="/assets/cloudbox.css" type="text/css">
 		<link id="darkmode" rel="stylesheet" href="/assets/cloudbox-dark.css" type="text/css"{{if not .IsDarkMode}}disabled{{end}}>
 		{{if not .GM13}}<script>var cloudbox = {}; cloudbox.GetPackage = function (type, id, rev) {window.location = "garrysmod://" + (type === "map" ? "install" : "spawn") + "/" + type + "/" + id + "/" + rev;}</script>{{end}}
@@ -50,13 +54,9 @@
 			</div>
 		</div>
 		<div class="topclouds"></div>
-		<script>
-			var animationTime = new Date();
-			animationTimeTop = "-" + (animationTime.getSeconds() % 10) + "." + animationTime.getMilliseconds() + "s";
-			document.querySelector(".topclouds").setAttribute("style", "-webkit-animation-delay: "+animationTimeTop+"; animation-delay: "+animationTimeTop+";");
-		</script>
+		
 		{{if .HomePage}}
-			<div class="content" style="padding-top:0">
+			<div class="content" style="padding-top:0; {{if ne .PageType "home"}}padding-bottom: 16px;{{end}}">
 				{{if eq .PageType "home"}}
 					{{template "home" .}}
 				{{else if eq .PageType "news"}}
@@ -66,8 +66,7 @@
 				{{else if eq .PageType "error"}}
 					<div class="pillbox">
 						<h2>Page Not Found (404)</h2>
-						<p>URL does not exist :(</p>
-						<p>(Sad mascot would go here)</p>
+						<p>URL does not exist <span style="font-size: 22px;">&#x1F641;</span></p>
 					</div>
 				{{end}}
 			</div>
@@ -81,10 +80,34 @@
 				{{end}}
 			</div>
 		{{end}}
+		
+		<div class="metabox">
+			<div class="metabox-target"></div>
+		</div>
 		<div class="bottomclouds"></div>
 		<script>
-			animationTimeBottom = "-" + (animationTime.getSeconds() % 5) + "." + animationTime.getMilliseconds() + "s";
-			document.querySelector(".bottomclouds").setAttribute("style", "-webkit-animation-delay: "+animationTimeBottom+"; animation-delay: "+animationTimeBottom+";");
+			function animationTimeString(time, total) {
+				return "-webkit-animation-delay: -" + (time.getSeconds() % total) + "." + (time.getMilliseconds()/1000).toFixed(3).substring(2) + "s;";
+			}
+			
+			var animationTime = new Date();
+			document.querySelector(".topclouds").setAttribute("style", animationTimeString(animationTime, 10));
+			document.querySelector(".bottomclouds").setAttribute("style", animationTimeString(animationTime, 5));
+		
+			var items = document.querySelectorAll(".item");
+			var metabox = document.querySelector(".metabox");
+			var metaboxTarget = metabox.querySelector(".metabox-target");
+			itemHover = function(e) {
+				metabox.classList.add("active");
+				metaboxTarget.innerHTML = this.querySelector(".metabox-template").innerHTML;
+			};
+			itemLeave = function(e) {
+				metabox.classList.remove("active");
+			};
+			for (i=0; i<items.length; i++) {
+				items[i].addEventListener("mouseover", itemHover);
+				items[i].addEventListener("mouseout", itemLeave);
+			}
 		</script>
 	</body>	
 </html>

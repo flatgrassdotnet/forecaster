@@ -1,14 +1,15 @@
 {{define "home"}}
-<div class="pillbox" id="lessnews">
+<div class="pillbox">
 	<h2>What's New? <a class="morelink large" href="/news"></a></h2>
 	
-	<h4>{{(index .News 0).Title}} <sub>by <b>{{(index .News 0).Author}}</b> - {{(index .News 0).Time.Format "02 January 2006, 3:04 pm (UTC)"}}</sub></h4>
-	<div class="newsformat">{{(index .News 0).Body}}</div>
-	
+	<div class="newsitem">
+		<h4>{{(index .News 0).Title}} <sub>by <b>{{(index .News 0).Author}}</b> - {{(index .News 0).Time.Format "02 January 2006, 3:04 pm (UTC)"}}</sub></h4>
+		<div class="newsformat">{{(index .News 0).Body}}</div>
+	</div>
 </div>
 
 
-<div class="pillbox">
+<div class="pillbox" style="padding-bottom: 0px;">
 	<h4>Popular Entities <a class="morelink" href="/browse/entities?sort=mostfavs"></a></h4>
 	<div style="white-space:nowrap; overflow:hidden;">
 		{{range .PopularENTs}}
@@ -17,7 +18,7 @@
 	</div>
 </div>
 
-<div class="pillbox">
+<div class="pillbox" style="padding-bottom: 0px;">
 	<h4>Popular Weapons <a class="morelink" href="/browse/weapons?sort=mostfavs"></a></h4>
 	<div style="white-space:nowrap; overflow:hidden;">
 		{{range .PopularSWEPs}}
@@ -26,7 +27,7 @@
 	</div>
 </div>
 
-<div class="pillbox">
+<div class="pillbox" style="padding-bottom: 0px;">
 	<small style="float:right">Note: Clicking a map below will automatically load the map</small>
 	<h4>Popular Maps <a class="morelink" href="/browse/maps?sort=mostfavs"></a></h4>
 	<div style="white-space:nowrap; overflow:hidden;">
