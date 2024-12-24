@@ -53,7 +53,21 @@
 				{{end}}
 			</div>
 		</div>
+		
 		<div class="topclouds"></div>
+		<div class="metabox">
+			<div class="metabox-target"></div>
+		</div>
+		<div class="bottomclouds"></div>
+		<script>
+			function animationTimeString(time, total) {
+				return "-webkit-animation-delay: -" + (time.getSeconds() % total) + "." + (time.getMilliseconds()/1000).toFixed(3).substring(2) + "s;";
+			}
+			
+			var animationTime = new Date();
+			document.querySelector(".topclouds").setAttribute("style", animationTimeString(animationTime, 10));
+			document.querySelector(".bottomclouds").setAttribute("style", animationTimeString(animationTime, 5));
+		</script>
 		
 		{{if .HomePage}}
 			<div class="content" style="padding-top:0; {{if ne .PageType "home"}}padding-bottom: 16px;{{end}}">
@@ -80,20 +94,7 @@
 				{{end}}
 			</div>
 		{{end}}
-		
-		<div class="metabox">
-			<div class="metabox-target"></div>
-		</div>
-		<div class="bottomclouds"></div>
 		<script>
-			function animationTimeString(time, total) {
-				return "-webkit-animation-delay: -" + (time.getSeconds() % total) + "." + (time.getMilliseconds()/1000).toFixed(3).substring(2) + "s;";
-			}
-			
-			var animationTime = new Date();
-			document.querySelector(".topclouds").setAttribute("style", animationTimeString(animationTime, 10));
-			document.querySelector(".bottomclouds").setAttribute("style", animationTimeString(animationTime, 5));
-		
 			var items = document.querySelectorAll(".item");
 			var metabox = document.querySelector(".metabox");
 			var metaboxTarget = metabox.querySelector(".metabox-target");
