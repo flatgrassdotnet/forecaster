@@ -1,5 +1,5 @@
 {{define "searchbar"}}
-<div class="search" style="-webkit-box-flex: 1; width: 100%;">
+<div class="search{{if or (eq .Sort "random") (eq .Sort "")}} search_sortrandom{{end}}" style="-webkit-box-flex: 1; width: 100%;">
 	<form>
 		<input id="searchbox" name="search" placeholder="Search" value="{{.Search}}"
 		{{if .InGame}}
