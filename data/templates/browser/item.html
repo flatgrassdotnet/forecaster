@@ -1,7 +1,8 @@
 {{define "item"}}
-<div class="item">
+<div class="item"> <!-- class="item isfav" when the item is favourite, when feature is available-->
 	<a onclick="cloudbox.GetPackage({{.Type}}, {{.ID}}, {{.Revision}})">
 		<div class="thumb">
+			<!--Uncomment when feature is available--><!--<div class="favtoggle"></div>-->
 			<div class="thumb_real" style="background-image: url('//img.cl0udb0x.com/{{.ID}}_thumb_128.png');"></div>
 		</div>
 		<div class="name">
