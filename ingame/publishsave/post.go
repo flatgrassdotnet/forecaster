@@ -24,6 +24,7 @@ import (
 	"html/template"
 	"net/http"
 	"net/url"
+	"os"
 
 	"github.com/flatgrassdotnet/forecaster/utils"
 )
@@ -46,7 +47,7 @@ func Post(w http.ResponseWriter, r *http.Request) {
 	v.Set("desc", r.PostForm.Get("desc"))
 	v.Set("ticket", r.Header.Get("TICKET"))
 
-	resp, err := http.Get(fmt.Sprintf("https://api.cl0udb0x.com/package/publishsave?%s", v.Encode()))
+	resp, err := http.Get(fmt.Sprintf("%s/package/publishsave?%s", os.Getenv("API_URL"), v.Encode()))
 	if err != nil {
 		utils.WriteError(w, r, fmt.Sprintf("failed to publish save: %s", err))
 		return

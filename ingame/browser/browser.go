@@ -26,6 +26,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"os"
 	"strconv"
 	"strings"
 
@@ -79,7 +80,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 		v := make(url.Values)
 		v.Set("ticket", r.Header.Get("TICKET"))
 
-		resp, err := http.Get(fmt.Sprintf("https://api.cl0udb0x.com/auth/getid?%s", v.Encode()))
+		resp, err := http.Get(fmt.Sprintf("%s/auth/getid?%s", os.Getenv("API_URL"), v.Encode()))
 		if err != nil {
 			utils.WriteError(w, r, fmt.Sprintf("failed to get steamid: %s", err))
 			return
@@ -122,7 +123,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 		v.Set("safemode", "true")
 	}
 
-	resp, err := http.Get(fmt.Sprintf("https://api.cl0udb0x.com/packages/list?%s", v.Encode()))
+	resp, err := http.Get(fmt.Sprintf("%s/packages/list?%s", os.Getenv("API_URL"), v.Encode()))
 	if err != nil {
 		utils.WriteError(w, r, fmt.Sprintf("failed to get package list: %s", err))
 		return

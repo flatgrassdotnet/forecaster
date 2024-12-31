@@ -23,6 +23,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/flatgrassdotnet/forecaster/ingame/browser"
 	"github.com/flatgrassdotnet/forecaster/ingame/home"
@@ -34,6 +35,10 @@ import (
 func main() {
 	port := flag.Int("port", 80, "web server listen port")
 	flag.Parse()
+
+	if os.Getenv("API_URL") == "" {
+		os.Setenv("API_URL", "https://api.cl0udb0x.com")
+	}
 
 	// static assets
 	http.Handle("GET /assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("data/assets"))))

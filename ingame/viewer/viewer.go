@@ -25,6 +25,7 @@ import (
 	"html/template"
 	"net/http"
 	"net/url"
+	"os"
 
 	"github.com/flatgrassdotnet/forecaster/common"
 	"github.com/flatgrassdotnet/forecaster/utils"
@@ -41,7 +42,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 	v := make(url.Values)
 	v.Set("id", r.PathValue("id"))
 
-	resp, err := http.Get(fmt.Sprintf("https://api.cl0udb0x.com/packages/get?%s", v.Encode()))
+	resp, err := http.Get(fmt.Sprintf("%s/packages/get?%s", os.Getenv("API_URL"), v.Encode()))
 	if err != nil {
 		utils.WriteError(w, r, fmt.Sprintf("failed to get package list: %s", err))
 		return

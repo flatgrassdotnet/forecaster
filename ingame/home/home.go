@@ -26,6 +26,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"os"
 	"slices"
 	"strings"
 
@@ -77,7 +78,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 		v := make(url.Values)
 		v.Set("ticket", r.Header.Get("TICKET"))
 
-		resp, err := http.Get(fmt.Sprintf("https://api.cl0udb0x.com/auth/getid?%s", v.Encode()))
+		resp, err := http.Get(fmt.Sprintf("%s/auth/getid?%s", os.Getenv("API_URL"), v.Encode()))
 		if err != nil {
 			utils.WriteError(w, r, fmt.Sprintf("failed to get steamid: %s", err))
 			return
@@ -109,7 +110,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 	var maps []common.Package
 	if pagetype == "home" {
 		v.Set("type", "entity")
-		resp, err := http.Get(fmt.Sprintf("https://api.cl0udb0x.com/packages/list?%s", v.Encode()))
+		resp, err := http.Get(fmt.Sprintf("%s/packages/list?%s", os.Getenv("API_URL"), v.Encode()))
 		if err != nil {
 			utils.WriteError(w, r, fmt.Sprintf("failed to get package list: %s", err))
 			return
@@ -122,7 +123,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 		}
 
 		v.Set("type", "weapon")
-		resp, err = http.Get(fmt.Sprintf("https://api.cl0udb0x.com/packages/list?%s", v.Encode()))
+		resp, err = http.Get(fmt.Sprintf("%s/packages/list?%s", os.Getenv("API_URL"), v.Encode()))
 		if err != nil {
 			utils.WriteError(w, r, fmt.Sprintf("failed to get package list: %s", err))
 			return
@@ -135,7 +136,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 		}
 
 		v.Set("type", "map")
-		resp, err = http.Get(fmt.Sprintf("https://api.cl0udb0x.com/packages/list?%s", v.Encode()))
+		resp, err = http.Get(fmt.Sprintf("%s/packages/list?%s", os.Getenv("API_URL"), v.Encode()))
 		if err != nil {
 			utils.WriteError(w, r, fmt.Sprintf("failed to get package list: %s", err))
 			return
@@ -150,7 +151,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 
 	var news []common.NewsEntry
 	if pagetype == "home" || pagetype == "news" {
-		resp, err := http.Get(fmt.Sprintf("https://api.cl0udb0x.com/news/list"))
+		resp, err := http.Get(fmt.Sprintf("%s/news/list", os.Getenv("API_URL")))
 		if err != nil {
 			utils.WriteError(w, r, fmt.Sprintf("failed to get news list: %s", err))
 			return
