@@ -6,8 +6,8 @@
 		<a href="/info" id="pgInfo"{{if eq .PageType "info"}} class="active"{{end}}><span class="navicon"></span><span>Info/Help</span></a>
 	{{else}}
 		<a href="?sort=random" id="random"{{if or (eq .Sort "random") (eq .Sort "")}} class="active"{{end}}><span class="navicon"></span><span>Random</span></a>
-		<a href="?sort=newest" id="newest"{{if eq .Sort "newest"}} class="active"{{end}}><span class="navicon"></span><span>Newest</span></a>
 		<a href="?sort=popular" id="popular"{{if eq .Sort "popular"}} class="active"{{end}}><span class="navicon"></span><span>Popular</span></a>
+		<a href="?sort=newest" id="newest"{{if eq .Sort "newest"}} class="active"{{end}}><span class="navicon"></span><span>Newest</span></a>
 	{{end}}
 </div>
 {{end}}
