@@ -34,39 +34,39 @@
 		</script>
 	</head>
 	<body>
-		<div class="header">
+		<div class="header" id="header_primary">
 			{{template "categorybar" .}}
 			{{if not .HomePage}}
 				{{template "searchbar" .}}
 				{{template "pagenav" .}}
 			{{end}}
 		</div>
-		<div class="header" style="padding-bottom: 2px; -webkit-box-pack: justify">
+		<div class="header" id="header_secondary">
 			{{template "sortbar" .}}
 			{{if and (.InGame) (eq .Category "savemap")}}
 				{{template "savetools" .}}
 			{{end}}
 			<div class="subbar" style="margin-left:auto; margin-right: 52px;">
-				<a id="togglemode" onclick="toggleMode()" title="Toggle Light/Dark Mode"><span class="navicon"></span></a>
+				<a id="togglemode" onclick="toggleMode()" class="hastooltip"><span class="navicon"></span></a>
 				{{if .GM13}}
 					<a id="settings" onclick="cloudbox.OpenSettings()"><span class="navicon"></span><span>Options</span></a>
 				{{end}}
 			</div>
 		</div>
 		
-		<div class="topclouds"></div>
+		<div class="clouds" id="topclouds"></div>
 		<div class="metabox">
 			<div class="metabox-target"></div>
 		</div>
-		<div class="bottomclouds"></div>
+		<div class="clouds" id="bottomclouds"></div>
 		<script>
 			function animationTimeString(time, total) {
 				return "-webkit-animation-delay: -" + (time.getSeconds() % total) + "." + (time.getMilliseconds()/1000).toFixed(3).substring(2) + "s;";
 			}
 			
 			var animationTime = new Date();
-			document.querySelector(".topclouds").setAttribute("style", animationTimeString(animationTime, 10));
-			document.querySelector(".bottomclouds").setAttribute("style", animationTimeString(animationTime, 5));
+			document.querySelector("#topclouds").setAttribute("style", animationTimeString(animationTime, 10));
+			document.querySelector("#bottomclouds").setAttribute("style", animationTimeString(animationTime, 5));
 		</script>
 		
 		{{if .HomePage}}
