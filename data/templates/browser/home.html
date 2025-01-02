@@ -10,7 +10,7 @@
 
 
 <div class="pillbox" style="padding-bottom: 0px;">
-	<h4>Popular Entities <a class="morelink" href="/browse/entities?sort=mostfavs"></a></h4>
+	<h4>Popular Entities <a class="morelink" href="/browse/entities?sort=popular"></a></h4>
 	<div style="white-space:nowrap; overflow:hidden;">
 		{{range .PopularENTs}}
 			{{template "item" .}}
@@ -19,7 +19,7 @@
 </div>
 
 <div class="pillbox" style="padding-bottom: 0px;">
-	<h4>Popular Weapons <a class="morelink" href="/browse/weapons?sort=mostfavs"></a></h4>
+	<h4>Popular Weapons <a class="morelink" href="/browse/weapons?sort=popular"></a></h4>
 	<div style="white-space:nowrap; overflow:hidden;">
 		{{range .PopularSWEPs}}
 			{{template "item" .}}
@@ -29,7 +29,7 @@
 
 <div class="pillbox" style="padding-bottom: 0px;">
 	<span class="tooltip" style="float:right">Note: Clicking a map below will automatically load the map</span>
-	<h4>Popular Maps <a class="morelink" href="/browse/maps?sort=mostfavs"></a></h4>
+	<h4>Popular Maps <a class="morelink" href="/browse/maps?sort=popular"></a></h4>
 	<div style="white-space:nowrap; overflow:hidden;">
 		{{range .PopularMaps}}
 			{{template "item" .}}

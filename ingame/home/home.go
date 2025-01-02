@@ -99,7 +99,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 
 	v := make(url.Values)
 	v.Set("count", "15")
-	v.Set("sort", "mostfavs")
+	v.Set("sort", "popular")
 
 	if r.Host == "safe.cl0udb0x.com" {
 		v.Set("safemode", "true")

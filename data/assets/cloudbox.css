@@ -51,7 +51,7 @@ form {margin-bottom: 0;}
 
 #newest .navicon {background-image: url('/assets/rustmb/combined/newest.png');}
 #random .navicon {background-image: url('/assets/rustmb/combined/random.png');}
-#mostfavs .navicon {background-image: url('/assets/rustmb/combined/mostfavs.png');}
+#popular .navicon {background-image: url('/assets/rustmb/combined/popular.png');}
 
 #uploadsave .navicon {background-image: url('/assets/rustmb/combined/uploadsave.png');}
 #cleanup .navicon {background-image: url('/assets/rustmb/combined/cleanup.png');}
