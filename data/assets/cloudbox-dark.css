@@ -1,11 +1,11 @@
-html, body {background-color: #171D25;}
 body {color: #DCDEDF;}
 a {color: #DCDEDF;}
 a:hover {color: #1A9FFF;}
 a.textlink:hover {color: #1A9FFF;}
 
+.header {background-color: #171D25;}
 
-#topclouds {background-image: url("/svg/clouds?fill=1B2838");}
+#topclouds {background-image: url("/svg/clouds?fill=1B2838"); background-color: #171D25;}
 #bottomclouds {background-image: url("/svg/clouds?fill=42576A");}
 
 

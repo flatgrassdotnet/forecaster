@@ -1,6 +1,8 @@
-html, body {background-color: #4096EE;}
-html {height: 100%;}
-body {height: 100%; margin: 0px; font-family: Helvetica; color: #333; display: -webkit-box; -webkit-box-orient: vertical; accent-color: #4096ee;}
+html, body {background-color: transparent; height: 100%;}
+@supports (width: calc(1px + 1px)) { /* Hack to prevent awesomium using the -webkit-mask-box-image as it impacts Awesomium rendering */
+	html.gm13 {-webkit-mask-box-image: url("/assets/darth/mask-4.png") 4;}
+}
+body {margin: 0px; font-family: Helvetica; color: #333; display: -webkit-box; -webkit-box-orient: vertical; accent-color: #4096ee;}
 a {color: #333; text-decoration: none;}
 a:hover {color: #FFF;}
 h1 {margin-left: 10px;}
@@ -8,17 +10,28 @@ a.textlink {font-weight: bold; cursor: pointer;}
 a.textlink:hover {color: #4096EE;}
 form {margin-bottom: 0;}
 
-.tooltip, .hastooltip:hover::before {background-color: #f9eeb5; display: inline-block; width: auto; font-size: 10px; white-space: nowrap; color: #6f6639; font-family: Verdana, Tahoma, sans-serif; font-weight: bold; border: 1px solid #827c5e; border-radius: 3px; padding: 2px 4px; box-shadow: inset 0 0 0 1px #fcf6da;}
-.hastooltip:hover::before {position: absolute; pointer-events: none;}
+/* tooltips */
+.tooltip, [tooltip]:hover::before {background-color: #f9eeb5; display: inline-block; width: auto; font-size: 10px; white-space: nowrap; color: #6f6639; font-family: Verdana, Tahoma, sans-serif; font-weight: bold; border: 1px solid #827c5e; border-radius: 3px; padding: 2px 4px; box-shadow: inset 0 0 0 1px #fcf6da;} /* common for inline and hover tooltip */
+[tooltip]:hover::before {position: absolute; pointer-events: none; content: attr(tooltip); z-index: 100; } /* hover tooltips */
+.tt_topleft[tooltip]:hover::before, .tt_top[tooltip]:hover::before, .tt_topright[tooltip]:hover::before {top: -5px; -webkit-transform: translateY(-100%);} /* top */
+.tt_bottomleft[tooltip]:hover::before, .tt_bottom[tooltip]:hover::before, .tt_bottomright[tooltip]:hover::before {bottom: -5px;  -webkit-transform: translateY(100%);} /* bottom */
+.tt_top[tooltip]:hover::before {left: 50%; -webkit-transform: translate(-50%, -100%); text-align: center;} /* top-middle */
+.tt_bottom[tooltip]:hover::before {left: 50%; -webkit-transform: translate(-50%, 100%); text-align: center;} /* bottom-middle */
+.tt_topleft[tooltip]:hover::before, .tt_bottomleft[tooltip]:hover::before {right: 0; text-align: right;} /* left (top/bottom) */
+.tt_topright[tooltip]:hover::before, .tt_bottomright[tooltip]:hover::before {left: 0; text-align: left;} /* right (top/bottom) */
+.tt_left[tooltip]:hover::before {left: -5px; top: 50%; -webkit-transform: translate(-100%, -50%); text-align: right;}  /* left (center) */
+.tt_right[tooltip]:hover::before {right: -5px; top: 50%; -webkit-transform: translate(100%, -50%); text-align: left;} /* right (center) */
 
-.header {width: 100%; display: -webkit-box; overflow: hidden; -webkit-user-select: none;}
+
+
+.header {width: 100%; display: -webkit-box; overflow: hidden; -webkit-user-select: none;  background-color: #4096EE;}
 
 #header_primary {}
 #header_secondary {-webkit-box-pack: justify; padding-bottom: 2px;}
 
 .clouds {height: 40px; width: 100%; pointer-events: none; -webkit-animation: clouds 0s linear infinite;}
-#topclouds {background-image: url("/svg/clouds?fill=B8E3FF"); -webkit-animation-duration: 10s;}
-#bottomclouds {position: fixed; bottom: 0px; background-image: url("/svg/clouds?fill=FFFFFF"); opacity: 0.25; -webkit-transition: opacity 0.2s 0.1s linear, bottom 0.2s 0.1s linear; z-index: 9; -webkit-animation-duration: 5s;}
+#topclouds {background-image: url("/svg/clouds?fill=B8E3FF"); -webkit-animation-duration: 10s;  background-color: #4096EE;}
+#bottomclouds {position: fixed; bottom: 0px; background-image: url("/svg/clouds?fill=FFFFFF"); opacity: 0.25; -webkit-transition: opacity 0.2s 0.1s linear, bottom 0.2s 0.1s linear; z-index: 200; -webkit-animation-duration: 5s;}
 
 .navbar a {width: 64px; height: 50px; float: left; overflow: hidden; font-size: 11px; text-align: center; margin-top: 10px; margin-left: 4px; font-weight: bolder; text-decoration: none; }
 .navbar .navicon {width: 32px; height: 32px; display: inline-block; background-size: cover; background-repeat: no-repeat; background-position: left;}
@@ -63,7 +76,6 @@ form {margin-bottom: 0;}
 #togglemode .navicon {background-image: url("/assets/rustmb/combined/sunmoon.png"); width: 100%; height: 100%;}
 #togglemode:hover .navicon {background-position: right;}
 
-#togglemode:hover::before {content: "Toggle Light/Dark Mode"; right: 48px; bottom: 24px; -webkit-transform: translate(0,50%);}
 
 .search {padding: 16px; padding-bottom: 0px;}
 .search #searchbox {width: 100%; padding: 5px; border: 2px solid; border-color: #595959; border-radius: 4px; box-sizing: border-box;}
@@ -108,14 +120,14 @@ a.morelink.large {width: 22px; height: 22px;}
 .item .favtoggle:hover {background-position: center;}
 .item.isfav .favtoggle:hover {background-position: right;}
 
-.item .favtoggle:hover::before {content: "Add to Favs"; right: 0; bottom: 28px;}
+.item .favtoggle:hover::before {content: "Add to Favs";}
 .item.isfav .favtoggle:hover::before {content: "Remove from Favs";}
 
 
 
 .item .metabox-template {display: none;}
 
-.metabox {position: fixed; background: rgba(255, 255, 255, 0.9); bottom: 0; left: 0; right: 0; height: 120px; opacity: 1; pointer-events: none; -webkit-transition: opacity 0.2s linear, bottom 0.2s linear; z-index: 10;}
+.metabox {position: fixed; background: rgba(255, 255, 255, 0.9); bottom: 0; left: 0; right: 0; height: 120px; opacity: 1; pointer-events: none; -webkit-transition: opacity 0.2s linear, bottom 0.2s linear; z-index: 201;}
 .metabox:not(.active)  {opacity: 0.25; bottom: -120px; height: 120px; -webkit-transition-delay: 0.1s;}
 .metabox.active + #bottomclouds {bottom: 120px; opacity: 0.9; -webkit-transition-delay: 0s;}
 

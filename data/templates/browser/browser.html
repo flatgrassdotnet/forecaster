@@ -1,12 +1,12 @@
 <!doctype html>
-<html>
+<html {{if .GM13}}class="gm13"{{end}}>
 	<head>
 		<title>Cloudbox</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="theme-color" content="#4096ee">
-		<link rel="stylesheet" href="/assets/cloudbox.css" type="text/css">
-		<link id="darkmode" rel="stylesheet" href="/assets/cloudbox-dark.css" type="text/css"{{if not .IsDarkMode}}disabled{{end}}>
+		<link rel="stylesheet" href="/assets/cloudbox.css?20250108" type="text/css">
+		<link id="darkmode" rel="stylesheet" href="/assets/cloudbox-dark.css?20250108" type="text/css"{{if not .IsDarkMode}}disabled{{end}}>
 		{{if not .GM13}}<script>var cloudbox = {}; cloudbox.GetPackage = function (type, id, rev) {window.location = "garrysmod://" + (type === "map" ? "install" : "spawn") + "/" + type + "/" + id + "/" + rev;}</script>{{end}}
 		<script>
 			var darkMode = {{.IsDarkMode}};
@@ -47,7 +47,7 @@
 				{{template "savetools" .}}
 			{{end}}
 			<div class="subbar" style="margin-left:auto; margin-right: 52px;">
-				<a id="togglemode" onclick="toggleMode()" class="hastooltip"><span class="navicon"></span></a>
+				<a id="togglemode" onclick="toggleMode()" class="tt_left" tooltip="Toggle Light/Dark Mode"><span class="navicon"></span></a>
 				{{if .GM13}}
 					<a id="settings" onclick="cloudbox.OpenSettings()"><span class="navicon"></span><span>Options</span></a>
 				{{end}}
