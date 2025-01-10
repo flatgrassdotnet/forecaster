@@ -158,7 +158,24 @@ a.morelink.large {width: 22px; height: 22px;}
 .metabox .meta-info .meta-user img {width: 48px; height: 48px; float: left; margin-right: 8px; }
 .metabox .meta-info .meta-user > div {line-height: 24px; }
 
-.metabox .meta-desc {background: rgba(184, 227, 255, 0.6); padding: 10px; font-size: 15px; border-radius: 8px; -webkit-box-flex: 1; white-space: collapse; margin-right: 15px;}
+.metabox .meta-desc {background: rgba(184, 227, 255, 0.6); padding: 10px; font-size: 15px; border-radius: 8px; -webkit-box-flex: 1; white-space: pre-line;}
+.metabox .meta-desc:empty::before {content: "No description available"; font-weight: normal; font-style: italic; opacity: 0.5;}
+.metabox .meta-desc.wrap {white-space: normal;}
+.metabox .meta-desc[data-scale="1"] {font-size: 14.5px;}
+.metabox .meta-desc[data-scale="2"] {font-size: 14px;}
+.metabox .meta-desc[data-scale="3"] {font-size: 13.5px;}
+.metabox .meta-desc[data-scale="4"] {font-size: 13px;}
+.metabox .meta-desc[data-scale="5"] {font-size: 12.5px;}
+.metabox .meta-desc[data-scale="6"] {font-size: 12px;}
+.metabox .meta-desc[data-scale="7"] {font-size: 11.5px;}
+.metabox .meta-desc[data-scale="8"] {font-size: 11px;}
+.metabox .meta-desc[data-scale="9"] {font-size: 10.5px;}
+.metabox .meta-desc[data-scale="10"] {font-size: 10px;}
+.metabox .meta-desc[data-scale="11"] {font-size: 9.5px;}
+.metabox .meta-desc[data-scale="12"] {font-size: 9px;}
+.metabox .meta-desc[data-scale="13"] {font-size: 8.5px;}
+.metabox .meta-desc[data-scale="14"] {font-size: 8px;}
+
 
 .saveform {padding: 16px 8px;}
 .saveform label {display: block;}

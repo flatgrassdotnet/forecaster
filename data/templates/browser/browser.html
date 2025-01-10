@@ -5,8 +5,8 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="theme-color" content="#4096ee">
-		<link rel="stylesheet" href="/assets/cloudbox.css?20250108" type="text/css">
-		<link id="darkmode" rel="stylesheet" href="/assets/cloudbox-dark.css?20250108" type="text/css"{{if not .IsDarkMode}}disabled{{end}}>
+		<link rel="stylesheet" href="/assets/cloudbox.css?20250110" type="text/css">
+		<link id="darkmode" rel="stylesheet" href="/assets/cloudbox-dark.css?20250110" type="text/css"{{if not .IsDarkMode}}disabled{{end}}>
 		{{if not .GM13}}<script>var cloudbox = {}; cloudbox.GetPackage = function (type, id, rev) {window.location = "garrysmod://" + (type === "map" ? "install" : "spawn") + "/" + type + "/" + id + "/" + rev;}</script>{{end}}
 		<script>
 			var darkMode = {{.IsDarkMode}};
@@ -55,7 +55,7 @@
 		</div>
 		
 		<div class="clouds" id="topclouds"></div>
-		<div class="metabox">
+		<div class="metabox" data-itemid="">
 			<div class="metabox-target"></div>
 		</div>
 		<div class="clouds" id="bottomclouds"></div>
@@ -95,12 +95,39 @@
 			</div>
 		{{end}}
 		<script>
+			function isScrolling(element) { // adapted from https://www.geeksforgeeks.org/check-whether-html-element-has-scrollbars-using-javascript/
+				var res = !! element["scrollTop"]; 
+				if (!res) { 
+					element["scrollTop"] = 1; 
+					res = !!element["scrollTop"]; 
+					element["scrollTop"] = 0; 
+				} 
+				return res; 
+			}
+			
 			var items = document.querySelectorAll(".item");
 			var metabox = document.querySelector(".metabox");
 			var metaboxTarget = metabox.querySelector(".metabox-target");
 			itemHover = function(e) {
 				metabox.classList.add("active");
-				metaboxTarget.innerHTML = this.querySelector(".metabox-template").innerHTML;
+				if (metabox.dataset.itemid != this.dataset.itemid) {
+					metabox.dataset.itemid = this.dataset.itemid;
+					metaboxTarget.innerHTML = this.querySelector(".metabox-template").innerHTML;
+					
+					var metaDesc = metaboxTarget.querySelector(".meta-desc");
+					while (isScrolling(metaDesc)) { // Make sure the description fits
+						var scale = Number(metaDesc.dataset.scale);
+						if (scale >= 14) {
+							if (metaDesc.classList.contains("wrap")) {
+								break;
+							}
+							metaDesc.classList.add("wrap");
+							scale = -1;
+						}
+						scale++;
+						metaDesc.dataset.scale = scale;
+					}
+				}
 			};
 			itemLeave = function(e) {
 				metabox.classList.remove("active");
@@ -109,6 +136,17 @@
 				items[i].addEventListener("mouseover", itemHover);
 				items[i].addEventListener("mouseout", itemLeave);
 			}
+			
+			
+			var content = document.querySelector(".content");
+			var bottomclouds = document.querySelector("#bottomclouds");
+			function checkScrollbar() {
+				var scrollbarWidth = content.offsetWidth - content.clientWidth;
+				bottomclouds.style.right = scrollbarWidth + "px";
+				metabox.style.right = scrollbarWidth + "px";
+			}
+			window.addEventListener("resize", checkScrollbar);
+			checkScrollbar();
 		</script>
 	</body>	
 </html>

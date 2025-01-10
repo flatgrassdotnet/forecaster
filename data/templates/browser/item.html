@@ -1,5 +1,5 @@
 {{define "item"}}
-<div class="item"> <!-- class="item isfav" when the item is favourite, when feature is available-->
+<div class="item" data-itemid="{{.ID}}"> <!-- class="item isfav" when the item is favourite, when feature is available-->
 	<a onclick="cloudbox.GetPackage({{.Type}}, {{.ID}}, {{.Revision}})">
 		<div class="thumb">
 			<!--Uncomment when feature is available--><!--<div class="favtoggle tt_topleft" tooltip></div>--><!--Tooltip text handled by CSS due to multi-state-->
@@ -40,11 +40,7 @@
 				<div>{{if eq .AuthorName ""}}Unknown{{else}}{{.AuthorName}}{{end}}</div>
 			</div>
 		</div>
-		{{if ne .Description ""}}
-			<div class="meta-col meta-desc">{{.Description}}</div>
-		{{else}}
-			<div class="meta-col meta-desc"><span style="font-weight: normal; font-style: italic; opacity: 0.5;">No description available</span></div>
-		{{end}}
+		<div class="meta-col meta-desc" data-scale="0">{{.Description}}</div>
 	</div>
 </div>
 {{end}}
