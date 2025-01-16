@@ -1,14 +1,15 @@
 html, body {background-color: transparent; height: 100%;}
 @supports (width: calc(1px + 1px)) { /* Hack to prevent awesomium using the -webkit-mask-box-image as it impacts Awesomium rendering */
-	html.gm13 {-webkit-mask-box-image: url("/assets/darth/mask-4.png") 4;}
+	html.gm13 {-webkit-mask-box-image: url("/assets/darth/mask-4.png") 4;}	
 }
-body {margin: 0px; font-family: Helvetica; color: #333; display: -webkit-box; -webkit-box-orient: vertical; accent-color: #4096ee;}
+body {margin: 0px; font-family: Helvetica; color: #333; display: -webkit-box; -webkit-box-orient: vertical; accent-color: #4096EE;}
 a {color: #333; text-decoration: none;}
 a:hover {color: #FFF;}
 h1 {margin-left: 10px;}
 a.textlink {font-weight: bold; cursor: pointer;}
 a.textlink:hover {color: #4096EE;}
 form {margin-bottom: 0;}
+
 
 #searchresults:empty::before {content: "No matches \1F632"; display: block; margin-bottom: 10px;}
 
@@ -81,6 +82,7 @@ form {margin-bottom: 0;}
 
 .search {padding: 16px; padding-bottom: 0px;}
 .search #searchbox {width: 100%; padding: 5px; border: 2px solid; border-color: #595959; border-radius: 4px; box-sizing: border-box;}
+.search #searchbox:focus {outline: 0px; border-color: #4096EE; box-shadow: 0 0 0 2px white;}
 
 
 
@@ -101,8 +103,6 @@ a.morelink {width: 16px; height: 16px; display: inline-block; margin-left: 2px; 
 a.morelink:hover {background-position: left;}
 a.morelink.large {width: 22px; height: 22px;}
 
-#inline-options span {background-size: cover; background-position: left; background-repeat: no-repeat; background-image: url('/assets/rustmb/combined/gear.png'); display: inline-block; width: 16px; height: 16px; vertical-align: text-top; margin-right: 3px;}
-#inline-options:hover span {background-position: right;}
 
 a.textlink .linkicon {background-size: cover; background-position: left; background-repeat: no-repeat; display: inline-block; width: 1em; height: 1em; vertical-align: text-top; margin-right: 3px;}
 a.textlink:hover .linkicon {background-position: right;}

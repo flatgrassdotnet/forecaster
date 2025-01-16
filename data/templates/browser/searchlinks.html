@@ -4,5 +4,7 @@
 {{if not .GM13}}
 	<a class="textlink" href="/browse/saves?sort=popular&search={{.Search}}"><span class="linkicon" style="background-image: url('/assets/rustmb/combined/savemap.png');"></span>Saves</a>
 {{end}}
-<a class="textlink" href="/browse/maps?sort=popular&search={{.Search}}"><span class="linkicon" style="background-image: url('/assets/rustmb/combined/map.png');"></span>Maps</a>
+{{if or (not .InGame) (.GM13)}}
+	<a class="textlink" href="/browse/maps?sort=popular&search={{.Search}}"><span class="linkicon" style="background-image: url('/assets/rustmb/combined/map.png');"></span>Maps</a>
+{{end}}
 {{end}}

@@ -12,7 +12,8 @@ a.textlink:hover {color: #1A9FFF;}
 #togglemode .navicon {background-position: right;}
 #togglemode:hover .navicon {background-position: left;}
 
-.search #searchbox {border-color: #969696; background-color: black; color: white;}
+.search #searchbox {border-color: #969696; background-color: black; color: white; color-scheme: dark;}
+.search #searchbox:focus {box-shadow: 0 0 0 2px black;}
 
 .content {background-color: #1B2838; scrollbar-color: #1A9fff #273B52;}
 

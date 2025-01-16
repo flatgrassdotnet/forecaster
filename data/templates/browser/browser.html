@@ -5,8 +5,8 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="theme-color" content="#4096ee">
-		<link rel="stylesheet" href="/assets/cloudbox.css?20250110" type="text/css">
-		<link id="darkmode" rel="stylesheet" href="/assets/cloudbox-dark.css?20250110" type="text/css"{{if not .IsDarkMode}}disabled{{end}}>
+		<link rel="stylesheet" href="/assets/cloudbox.css?20250112" type="text/css">
+		<link id="darkmode" rel="stylesheet" href="/assets/cloudbox-dark.css?20250112" type="text/css"{{if not .IsDarkMode}}disabled{{end}}>
 		{{if not .GM13}}<script>var cloudbox = {}; cloudbox.GetPackage = function (type, id, rev) {window.location = "garrysmod://" + (type === "map" ? "install" : "spawn") + "/" + type + "/" + id + "/" + rev;}</script>{{end}}
 		<script>
 			var darkMode = {{.IsDarkMode}};
@@ -101,10 +101,12 @@
 					{{template "item" .}}
 				{{end}}</div>
 				{{if ne .Search ""}}
-					<div class="pillbox" style="display: inline-block; width: auto; margin-top: 12px; font-size: 14px; background-color: transparent;">
-						<h4>See search results in other categories</h4>
-						{{template "searchlinks" .}}
-					</div>
+					{{if or (not .InGame) (ne .Category "map") (.GM13)}}
+						<div class="pillbox" style="display: inline-block; width: auto; margin-top: 12px; font-size: 14px; background-color: transparent;">
+							<h4>See search results in other categories</h4>
+							{{template "searchlinks" .}}
+						</div>
+					{{end}}
 				{{end}}
 			</div>
 		{{end}}
