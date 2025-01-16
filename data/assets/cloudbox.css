@@ -10,6 +10,8 @@ a.textlink {font-weight: bold; cursor: pointer;}
 a.textlink:hover {color: #4096EE;}
 form {margin-bottom: 0;}
 
+#searchresults:empty::before {content: "No matches \1F632"; display: block; margin-bottom: 10px;}
+
 /* tooltips */
 .tooltip, [tooltip]:hover::before {background-color: #f9eeb5; display: inline-block; width: auto; font-size: 10px; white-space: nowrap; color: #6f6639; font-family: Verdana, Tahoma, sans-serif; font-weight: bold; border: 1px solid #827c5e; border-radius: 3px; padding: 2px 4px; box-shadow: inset 0 0 0 1px #fcf6da;} /* common for inline and hover tooltip */
 [tooltip]:hover::before {position: absolute; pointer-events: none; content: attr(tooltip); z-index: 100; } /* hover tooltips */
@@ -101,6 +103,9 @@ a.morelink.large {width: 22px; height: 22px;}
 
 #inline-options span {background-size: cover; background-position: left; background-repeat: no-repeat; background-image: url('/assets/rustmb/combined/gear.png'); display: inline-block; width: 16px; height: 16px; vertical-align: text-top; margin-right: 3px;}
 #inline-options:hover span {background-position: right;}
+
+a.textlink .linkicon {background-size: cover; background-position: left; background-repeat: no-repeat; display: inline-block; width: 1em; height: 1em; vertical-align: text-top; margin-right: 3px;}
+a.textlink:hover .linkicon {background-position: right;}
 
 .newsitem:not(:last-child) {border-bottom: 1px solid #B8E3FF;}
 

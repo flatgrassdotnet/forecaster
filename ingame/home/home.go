@@ -58,10 +58,11 @@ const itemsPerPage = 50
 
 var (
 	pagetypes = map[string]string{
-		"home":  "home",
-		"news":  "news",
-		"info":  "info",
-		"error": "error",
+		"home":   "home",
+		"news":   "news",
+		"info":   "info",
+		"search": "search",
+		"error":  "error",
 	}
 	t = template.Must(template.New("browser.html").Funcs(template.FuncMap{"StripHTTPS": func(url string) string { s, _ := strings.CutPrefix(url, "https:"); return s }}).ParseGlob("data/templates/browser/*.html"))
 )
@@ -175,6 +176,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 		HomePage:     true,
 		PageType:     pagetype,
 		IsDarkMode:   darkmode,
+		Search:       r.URL.Query().Get("search"),
 		News:         news,
 		PopularENTs:  ents,
 		PopularSWEPs: sweps,

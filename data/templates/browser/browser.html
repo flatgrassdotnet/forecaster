@@ -36,8 +36,8 @@
 	<body>
 		<div class="header" id="header_primary">
 			{{template "categorybar" .}}
+			{{template "searchbar" .}}
 			{{if not .HomePage}}
-				{{template "searchbar" .}}
 				{{template "pagenav" .}}
 			{{end}}
 		</div>
@@ -77,6 +77,13 @@
 					{{template "news" .}}
 				{{else if eq .PageType "info"}}
 					{{template "info" .}}
+				{{else if eq .PageType "search"}}
+					<div style="text-align: center;">
+						<h2 style="margin-top: 0; margin-bottom: 6px;">View <i>{{.Search}}</i> results</h2>
+						<div class="pillbox" style="display: inline-block; width: auto; font-size: 20px;">
+							{{template "searchlinks" .}}
+						</div>
+					</div>
 				{{else if eq .PageType "error"}}
 					<div class="pillbox">
 						<h2>Page Not Found (404)</h2>
@@ -86,11 +93,18 @@
 			</div>
 		{{else}}
 			<div class="content" style="text-align:center;">
-				{{range .Packages}}
+				{{if ne .Search ""}}<h2 style="margin-top: 0;"><i>{{.Search}}</i> {{if eq .Category "entity"}}entities{{else if eq .Category "weapon"}}weapons{{else if eq .Category "prop"}}props{{else if eq .Category "savemap"}}saves{{else if eq .Category "map"}}maps{{end}}</h2>{{end}}
+				<div {{if ne .Search ""}}id="searchresults"{{end}}>{{range .Packages}}
 					{{if and ($.InGame) (eq $.Category "savemap") (ne $.MapName .Dataname)}}
 						{{continue}}
 					{{end}}
 					{{template "item" .}}
+				{{end}}</div>
+				{{if ne .Search ""}}
+					<div class="pillbox" style="display: inline-block; width: auto; margin-top: 12px; font-size: 14px; background-color: transparent;">
+						<h4>See search results in other categories</h4>
+						{{template "searchlinks" .}}
+					</div>
 				{{end}}
 			</div>
 		{{end}}
