@@ -63,7 +63,7 @@ func main() {
 		http.Redirect(w, r, "/home", http.StatusSeeOther)
 	})
 	http.HandleFunc("GET toybox.garrysmod.com/ingame/", func(w http.ResponseWriter, r *http.Request) {
-		http.Redirect(w, r, "/browse/entities", http.StatusSeeOther)
+		http.Redirect(w, r, "/home", http.StatusSeeOther)
 	})
 	http.HandleFunc("GET toybox.garrysmod.com/IG/maps/", func(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/browse/maps", http.StatusSeeOther)
