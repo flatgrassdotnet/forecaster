@@ -62,6 +62,7 @@ var (
 		"news":   "news",
 		"info":   "info",
 		"search": "search",
+		"zoo":    "zoo",
 		"error":  "error",
 	}
 	t = template.Must(template.New("browser.html").Funcs(template.FuncMap{"StripHTTPS": func(url string) string { s, _ := strings.CutPrefix(url, "https:"); return s }}).ParseGlob("data/templates/browser/*.html"))
@@ -70,7 +71,7 @@ var (
 func Handle(w http.ResponseWriter, r *http.Request) {
 	pagetype, ok := pagetypes[r.PathValue("pagetype")]
 	if !ok {
-		http.Error(w, "unknown page", http.StatusNotFound)
+		http.Redirect(w, r, "/error", http.StatusSeeOther)
 		return
 	}
 

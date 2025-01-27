@@ -1,3 +1,4 @@
+/* Core */
 html, body {background-color: transparent; height: 100%;}
 @supports (width: calc(1px + 1px)) { /* Hack to prevent awesomium using the -webkit-mask-box-image as it impacts Awesomium rendering */
 	html.gm13 {-webkit-mask-box-image: url("/assets/darth/mask-4.png") 4;}	
@@ -11,7 +12,45 @@ a.textlink:hover {color: #4096EE;}
 form {margin-bottom: 0;}
 
 
+/* Common form elements */
+.form_input, .form_btn {box-sizing: border-box; padding: 5px; border: 2px solid #595959; border-radius: 4px; color: black; color-scheme: light;}
+.form_input:focus, .form_btn:focus,
+.form_input:active, .form_btn:active {outline: none !important; box-shadow: 0 0 0 2px #B8E3FF;}
+.form_input:focus-visible, .form_btn:focus-visible {outline: none !important;}
+
+/* Common form elements - Text */
+.form_input {background-color: white;}
+.form_input:hover {border-color: #333;}
+.form_input:focus, .form_input:active {border-color: #4096EE;}
+
+/* Common form elements - Button */
+.form_btn {border-color: #4096EE; background-color: #B8E3FF;}
+.form_btn:hover {background-color: #4096EE; color: white;}
+
+
+
+
+
 #searchresults:empty::before {content: "No results"; display: block; margin-bottom: 10px;}
+
+
+/* Dialog / Alert */
+dialog {box-sizing: border-box; padding: 15px; width: 450px; max-width: 100%; border: none; border-radius: 10px; background: white;}
+dialog:focus-visible {outline: none;}
+
+dialog::backdrop {background-color: rgba(0,0,0,0.6);}
+
+dialog h3 {margin-top: 0px; color: #4096EE;}
+dialog h3:empty {display: none;}
+dialog button.form_btn {font-size: 14px; float: right; padding: 6px 12px;}
+
+/* Dialog fallback for GM12/Awesomium */
+.no-dialog dialog {display: none;}
+.no-dialog dialog[open] {display: inline-block; position: fixed; top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%); z-index: 500;}
+.no-dialog #backdrop {display: none;}
+.no-dialog #backdrop[open] {display: block; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.6); z-index: 490;}
+
+
 
 /* tooltips */
 .tooltip, [tooltip]:hover::before {background-color: #f9eeb5; display: inline-block; width: auto; font-size: 10px; white-space: nowrap; color: #6f6639; font-family: Verdana, Tahoma, sans-serif; font-weight: bold; border: 1px solid #827c5e; border-radius: 3px; padding: 2px 4px; box-shadow: inset 0 0 0 1px #fcf6da;} /* common for inline and hover tooltip */
@@ -80,9 +119,14 @@ form {margin-bottom: 0;}
 #togglemode:hover .navicon {background-position: right;}
 
 
-.search {padding: 16px; padding-bottom: 0px;}
-.search #searchbox {width: 100%; padding: 5px; border: 2px solid; border-color: #595959; border-radius: 4px; box-sizing: border-box;}
-.search #searchbox:focus {outline: 0px; border-color: #4096EE; box-shadow: 0 0 0 2px white;}
+
+
+.search {padding: 16px; padding-bottom: 0px; position: relative;}
+.search #searchbox {width: 100%; font-size: 13px; line-height: 1.2em; -webkit-transition: border 0.01s linear, box-shadow 0.01s linear;}
+.search #searchbox:focus {}
+.search button {-webkit-appearance: none; border: none; padding: 0; margin: 0; outline: 0; display: inline-block; background-color: transparent; background-size: cover; background-repeat: no-repeat; background-position: left; background-image: url("/assets/rustmb/combined/find.png"); cursor: pointer; width: 24px; height: 24px; position: absolute; top: 19px; right: 19px;}
+.search button:hover {background-position: right;}
+.search #searchbox:placeholder-shown + button {display: none;}
 
 
 
@@ -201,6 +245,8 @@ a.textlink:hover .linkicon {background-position: right;}
 ::-webkit-scrollbar-button:increment {border-radius: 0px 0px 4px 4px; background-position: 3px 5px; background-repeat: no-repeat; background-image: url('/assets/darth/scrolldown.gif');}
 ::-webkit-scrollbar-button:increment:active {background-image: url('/assets/darth/scrolldown_active.gif')}
 
+#scrolldemo_outer1 {background-color: white;}
+#scrolldemo_outer2 {background-color: #B8E3FF;}
 
 
 @media (max-width: 859px) {
@@ -213,13 +259,15 @@ a.textlink:hover .linkicon {background-position: right;}
 	
 }
 
-@media (max-width: 699px) {
+@media (max-width: 775px) {
 	
 	.header {display: block;}
 	
 	.header .navbar:first-child {overflow: auto; zoom: 0.85;}
 	.header .search {box-sizing: border-box; padding-top: 4px; padding-bottom: 4px; padding-left: 4px; padding-right: 102px; margin-right: -106px; display: inline-block;}
 	.header .search.search_sortrandom {padding-right: 52px; margin-right: -56px;}
+	.header .search button {top: 7px; right: 105px;}
+	.header .search.search_sortrandom button {right: 55px;}
 	.header .search + .navbar {overflow: auto; float: right; zoom: 0.8; position: relative;}
 	.header .search + .navbar a {margin-top: 0px; margin-left: 0px;}
 	
