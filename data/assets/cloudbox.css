@@ -12,6 +12,12 @@ a.textlink:hover {color: #4096EE;}
 form {margin-bottom: 0;}
 
 
+/* Text helpers */
+.case {text-transform: lowercase;}
+.Case {text-transform: capitalize;}
+.CASE {text-transform: uppercase;}
+
+
 /* Common form elements */
 .form_input, .form_btn {box-sizing: border-box; padding: 5px; border: 2px solid #595959; border-radius: 4px; color: black; color-scheme: light;}
 .form_input:focus, .form_btn:focus,
@@ -75,7 +81,7 @@ dialog button.form_btn {font-size: 14px; float: right; padding: 6px 12px;}
 #topclouds {background-image: url("/svg/clouds?fill=B8E3FF"); -webkit-animation-duration: 10s;  background-color: #4096EE;}
 #bottomclouds {position: fixed; bottom: 0px; background-image: url("/svg/clouds?fill=FFFFFF"); opacity: 0.25; -webkit-transition: opacity 0.2s 0.1s linear, bottom 0.2s 0.1s linear; z-index: 200; -webkit-animation-duration: 5s;}
 
-.navbar a {width: 64px; height: 50px; float: left; overflow: hidden; font-size: 11px; text-align: center; margin-top: 10px; margin-left: 4px; font-weight: bolder; text-decoration: none; }
+.navbar a {width: 64px; height: 50px; float: left; overflow: hidden; font-size: 11px; text-align: center; margin-top: 10px; margin-left: 4px; font-weight: bolder; text-decoration: none; white-space: nowrap; text-overflow: ellipsis;}
 .navbar .navicon {width: 32px; height: 32px; display: inline-block; background-size: cover; background-repeat: no-repeat; background-position: left;}
 .navbar a:hover .navicon, .navbar a.active .navicon {background-position: right;}
 .navbar .disabled {opacity: 0.25; pointer-events: none;}
@@ -122,6 +128,7 @@ dialog button.form_btn {font-size: 14px; float: right; padding: 6px 12px;}
 
 
 .search {padding: 16px; padding-bottom: 0px; position: relative;}
+.search.searchspacing_home {margin-right: 136px;}
 .search #searchbox {width: 100%; font-size: 13px; line-height: 1.2em; -webkit-transition: border 0.01s linear, box-shadow 0.01s linear;}
 .search #searchbox:focus {}
 .search button {-webkit-appearance: none; border: none; padding: 0; margin: 0; outline: 0; display: inline-block; background-color: transparent; background-size: cover; background-repeat: no-repeat; background-position: left; background-image: url("/assets/rustmb/combined/find.png"); cursor: pointer; width: 24px; height: 24px; position: absolute; top: 19px; right: 19px;}
@@ -251,6 +258,8 @@ a.textlink:hover .linkicon {background-position: right;}
 
 @media (max-width: 859px) {
 	
+	.header .search {margin-right: 0px;}
+	
 	.content {padding-left: 2px; padding-right: 2px;}
 	
 	.metabox-target {margin-left: 0px; margin-right: 0px;}
@@ -265,9 +274,11 @@ a.textlink:hover .linkicon {background-position: right;}
 	
 	.header .navbar:first-child {overflow: auto; zoom: 0.85;}
 	.header .search {box-sizing: border-box; padding-top: 4px; padding-bottom: 4px; padding-left: 4px; padding-right: 102px; margin-right: -106px; display: inline-block;}
-	.header .search.search_sortrandom {padding-right: 52px; margin-right: -56px;}
+	.header .search.searchspacing_sortrandom {padding-right: 52px; margin-right: -56px;}
+	.header .search.searchspacing_home {padding-right: 4px; margin-right: -8px;}
 	.header .search button {top: 7px; right: 105px;}
-	.header .search.search_sortrandom button {right: 55px;}
+	.header .search.searchspacing_sortrandom button {right: 55px;}
+	.header .search.searchspacing_home button {right: 7px;}
 	.header .search + .navbar {overflow: auto; float: right; zoom: 0.8; position: relative;}
 	.header .search + .navbar a {margin-top: 0px; margin-left: 0px;}
 	

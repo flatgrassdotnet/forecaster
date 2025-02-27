@@ -102,3 +102,62 @@ if (typeof HTMLDialogElement !== 'function') {
 		}
 	});
 }
+
+
+// Translation - GM13 only
+var tPrefix = "translate_";
+function performTranslation() { // Perform the translation, from cached terms
+	var langStrings = {};
+	var elements = document.querySelectorAll("[translate]");
+	for (i=0; i<elements.length; i++) {
+		var el = elements[i];
+		var strResult = sessionStorage.getItem(tPrefix+el.getAttribute("translate"));
+		if (strResult) {
+			el.innerText = strResult;
+			el.setAttribute("dir", "auto"); // Allow rtl languages to display correctly
+		}
+	}
+}
+function checkNeededTranslation() { // Get list of non-cached translation strings
+	var langStrings = [];
+	var elements = document.querySelectorAll("[translate]");
+	for (i=0; i<elements.length; i++) {
+		var strKey = elements[i].getAttribute("translate");
+		if (sessionStorage.getItem(tPrefix+strKey) == undefined && !(langStrings.indexOf(strKey)> -1)) {
+			langStrings.push(strKey);
+		}
+	}
+	return langStrings;
+}
+function requestTranslation(terms) { // Request missing terms from game
+	try {
+		if (navigator.userAgent.indexOf("Chrome/18.") > -1) { // Awesomium, thanks garry
+		
+			var results = JSON.parse(cloudbox.GetTranslations(terms.toString()));
+			// loop over the results, add to sessionStorage
+			for (i=0; i<terms.length; i++) {
+				sessionStorage.setItem(tPrefix+terms[i], results[terms[i]]);
+			}
+			performTranslation(); // Now go ahead with translation
+		
+		} else { // x86-64
+			cloudbox.GetTranslations(terms.toString(), function(res) {
+				var results = JSON.parse(res);
+				// loop over the results, add to sessionStorage
+				for (i=0; i<terms.length; i++) {
+					sessionStorage.setItem(tPrefix+terms[i], results[terms[i]]);
+				}
+				performTranslation(); // Now go ahead with translation
+			});
+		}
+	} catch(ex) {}
+}
+
+if (document.documentElement.classList.contains("gm13")) {
+	var needs = checkNeededTranslation(); // Get list of non-cached translation strings 
+	if (needs.length == 0) { // Any terms are cached, go ahead with translation
+		performTranslation();
+	} else {
+		requestTranslation(needs); // Request missing terms from game
+	}
+}

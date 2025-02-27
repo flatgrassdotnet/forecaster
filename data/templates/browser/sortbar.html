@@ -2,11 +2,11 @@
 <div class="subbar">
 	{{if .HomePage}}
 		<a href="/home" id="pgFeatured"{{if eq .PageType "home"}} class="active"{{end}}><span class="navicon"></span><span>Featured</span></a>
-		<a href="/news" id="pgNews"{{if eq .PageType "news"}} class="active"{{end}}><span class="navicon"></span><span>News</span></a>
-		<a href="/info" id="pgInfo"{{if eq .PageType "info"}} class="active"{{end}}><span class="navicon"></span><span>Info/Help</span></a>
+		<a href="/news" id="pgNews"{{if eq .PageType "news"}} class="active"{{end}}><span class="navicon"></span><span translate="news">News</span></a>
+		<a href="/info" id="pgInfo"{{if eq .PageType "info"}} class="active"{{end}}><span class="navicon"></span><span>Info/</span><span translate="help">Help</span></a>
 	{{else}}
 		<a href="?sort=random" id="random"{{if or (eq .Sort "random") (eq .Sort "")}} class="active"{{end}}><span class="navicon"></span><span>Random</span></a>
-		<a href="?sort=popular" id="popular"{{if eq .Sort "popular"}} class="active"{{end}}><span class="navicon"></span><span>Popular</span></a>
+		<a href="?sort=popular" id="popular"{{if eq .Sort "popular"}} class="active"{{end}}><span class="navicon"></span><span translate="popular">Popular</span></a>
 		<a href="?sort=newest" id="newest"{{if eq .Sort "newest"}} class="active"{{end}}><span class="navicon"></span><span>Newest</span></a>
 	{{end}}
 </div>

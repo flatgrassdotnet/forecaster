@@ -5,9 +5,9 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="theme-color" content="#4096ee">
-		<link rel="stylesheet" href="/assets/cloudbox.css?20250125" type="text/css">
-		<link id="darkmode" rel="stylesheet" href="/assets/cloudbox-dark.css?20250125" type="text/css" {{if not .IsDarkMode}}disabled{{end}}>
-		<script src="/assets/cloudbox.js?20250125" defer></script>
+		<link rel="stylesheet" href="/assets/cloudbox.css?20250220" type="text/css">
+		<link id="darkmode" rel="stylesheet" href="/assets/cloudbox-dark.css?20250220" type="text/css" {{if not .IsDarkMode}}disabled{{end}}>
+		<script src="/assets/cloudbox.js?20250220" defer></script>
 		{{if not .GM13}}<script>var cloudbox = {}; cloudbox.GetPackage = function (type, id, rev) {window.location = "garrysmod://" + (type === "map" ? "install" : "spawn") + "/" + type + "/" + id + "/" + rev;}</script>{{end}}
 		<script>
 			var darkMode = {{.IsDarkMode}};
@@ -50,7 +50,7 @@
 			<div class="subbar" style="margin-left:auto; margin-right: 52px;">
 				<a id="togglemode" onclick="toggleMode()" class="tt_left" tooltip="Toggle Light/Dark Mode"><span class="navicon"></span></a>
 				{{if .GM13}}
-					<a id="settings" onclick="cloudbox.OpenSettings()"><span class="navicon"></span><span>Options</span></a>
+					<a id="settings" onclick="cloudbox.OpenSettings()"><span class="navicon"></span><span translate="options">Options</span></a>
 				{{end}}
 			</div>
 		</div>
@@ -96,7 +96,7 @@
 			</div>
 		{{else}}
 			<div class="content" style="text-align:center;">
-				{{if ne .Search ""}}<h2 style="margin-top: 0;"><i>{{.Search}}</i> {{if eq .Category "entity"}}entities{{else if eq .Category "weapon"}}weapons{{else if eq .Category "prop"}}props{{else if eq .Category "savemap"}}saves{{else if eq .Category "map"}}maps{{end}}</h2>{{end}}
+				{{if ne .Search ""}}{{template "searchresultsheading" .}}{{end}}
 				<div {{if ne .Search ""}}id="searchresults"{{end}}>{{range .Packages}}
 					{{if and ($.InGame) (eq $.Category "savemap") (ne $.MapName .Dataname)}}
 						{{continue}}

@@ -1,5 +1,24 @@
 {{define "zoo"}}
 <div class="pillbox">
+	<h2>Localisation</h2>
+	<p>
+		Localisation is supported in GM13 only. GM12 and desktop will simply ignore it.<br/>
+		Any element can have a <code>translate</code> attribute with the target localisation key. The text value of that element will be replaced if a match is found.<br/>
+	</p>
+	<ul>
+		<li>Code: <code>Spawn &lt;span translate="addons.entity"&gt;Entities&lt;/span&gt; and &lt;span translate="addons.vehicle"&gt;Vehicles&lt;/span&gt;</code></li>
+		<li>Example: Spawn <span translate="addons.entity">Entities</span> and <span translate="addons.vehicle">Vehicles</span></li>
+	</ul>
+	<p>
+		If no match can be found for the user's language, the existing text value will be kept. For this reason, all strings should be the same as their default English value.
+	</p>
+	<ul>
+		<li>Code: <code>This key doesn't exist so will be kept as &lt;span translate="zimbabwe"&gt;bazinga&lt;/span&gt;</code></li>
+		<li>Example: This key doesn't exist so will be kept as <span translate="zimbabwe">bazinga</span></li>
+	</ul>
+</div>
+
+<div class="pillbox">
 	<h2>Input/form elements</h2>
 	<p>
 		HTML &lt;input&gt; elements can be styled for consistent display between desktop browsers, Gmod 13's multiple renderers, and Gmod 12. Elements adjust for light and dark mode, hover/focus/click, etc.<br/>
