@@ -73,6 +73,7 @@ dialog button.form_btn {font-size: 14px; float: right; padding: 6px 12px;}
 
 
 .header {width: 100%; display: -webkit-box; overflow: hidden; -webkit-user-select: none;  background-color: #4096EE;}
+.header.header_breakout {-webkit-box-flex: 1;} 
 
 #header_primary {}
 #header_secondary {-webkit-box-pack: justify; padding-bottom: 2px;}
@@ -130,9 +131,9 @@ dialog button.form_btn {font-size: 14px; float: right; padding: 6px 12px;}
 .search {padding: 16px; padding-bottom: 0px; position: relative;}
 .search #searchbox {width: 100%; font-size: 13px; line-height: 1.2em; -webkit-transition: border 0.01s linear, box-shadow 0.01s linear;}
 .search #searchbox:focus {}
-.search button {-webkit-appearance: none; border: none; padding: 0; margin: 0; outline: 0; display: inline-block; background-color: transparent; background-size: cover; background-repeat: no-repeat; background-position: left; background-image: url("/assets/rustmb/combined/find.png"); cursor: pointer; width: 24px; height: 24px; position: absolute; top: 19px; right: 19px;}
-.search button:hover {background-position: right;}
-.search #searchbox:placeholder-shown + button {display: none;}
+.search button {display: none;}
+.show-searchbtn .search button {-webkit-appearance: none; border: none; padding: 0; margin: 0; outline: 0; display: inline-block; background-color: transparent; background-size: cover; background-repeat: no-repeat; background-position: left; background-image: url("/assets/rustmb/combined/find.png"); cursor: pointer; width: 24px; height: 24px; position: absolute; top: 19px; right: 19px;}
+.show-searchbtn .search button:hover {background-position: right;}
 
 
 
@@ -269,17 +270,23 @@ a.textlink:hover .linkicon {background-position: right;}
 	
 	.header {display: block;}
 	
-	.header .navbar:first-child {overflow: auto; zoom: 0.85;}
-	.header .search {box-sizing: border-box; padding-top: 4px; padding-bottom: 4px; padding-left: 4px; padding-right: 102px; margin-right: -106px; display: inline-block;}
-	.header .search.search_sortrandom {padding-right: 52px; margin-right: -56px;}
-	.header .search button {top: 7px; right: 105px;}
-	.header .search.search_sortrandom button {right: 55px;}
-	.header .search + .navbar {overflow: auto; float: right; zoom: 0.8; position: relative;}
-	.header .search + .navbar a {margin-top: 0px; margin-left: 0px;}
+	.header.header_breakout {display: -webkit-box;}
 	
-	#header_secondary {padding-top: 4px;}
+	.header .search {padding-left: 8px; padding-right: 8px; padding-top: 8px; padding-bottom: 16px;}
+	.header .search:not(:last-child) {padding-right: 0px;}
 	
-	.header .subbar {display: inline-block; margin-left: 4px;}
+	.header .search button {top: 11px; right: 11px;}
+	.header .search:not(:last-child) button {right: 3px;}
+	
+	.header .search + .navbar a {margin-top: 4px;}
+}
+
+@media (max-width: 499px) {
+	.header .navbar:first-child {zoom: 0.85;}
+	
+	.header .search {padding-bottom: 6px;}
+	
+	.header .search + .navbar {zoom: 0.8;}
+	
 	.header .subbar a:not(#togglemode) {zoom: 0.85;}
-	.header .subbar + .subbar {float: right;}
 }

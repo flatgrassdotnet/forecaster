@@ -8,6 +8,7 @@ function isScrolling(element) { // adapted from https://www.geeksforgeeks.org/ch
 	return res; 
 }
 
+// Metabox
 var items = document.querySelectorAll(".item");
 var metabox = document.querySelector(".metabox");
 var metaboxTarget = metabox.querySelector(".metabox-target");
@@ -41,6 +42,7 @@ for (i=0; i<items.length; i++) {
 }
 
 
+// Clouds - don't overlap scrollbar
 var content = document.querySelector(".content");
 var bottomclouds = document.querySelector("#bottomclouds");
 function checkScrollbar() {
@@ -52,6 +54,7 @@ window.addEventListener("resize", checkScrollbar);
 checkScrollbar();
 
 
+// cbalert() - alternative to alert()
 function cbalert(title, txt) {
 	if (typeof txt === "undefined") {
 		txt = title;
@@ -160,4 +163,9 @@ if (document.documentElement.classList.contains("gm13")) {
 	} else {
 		requestTranslation(needs); // Request missing terms from game
 	}
+}
+
+// Show search button on Linux and Mac, due to Gmod not accepting 'enter' event on those platforms.
+if ( (navigator.userAgent.toLowerCase().indexOf("linux") > -1) || (navigator.userAgent.toLowerCase().indexOf("macintosh") > -1) ) {
+	document.documentElement.classList.add("show-searchbtn");
 }
