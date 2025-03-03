@@ -128,7 +128,6 @@ dialog button.form_btn {font-size: 14px; float: right; padding: 6px 12px;}
 
 
 .search {padding: 16px; padding-bottom: 0px; position: relative;}
-.search.searchspacing_home {margin-right: 136px;}
 .search #searchbox {width: 100%; font-size: 13px; line-height: 1.2em; -webkit-transition: border 0.01s linear, box-shadow 0.01s linear;}
 .search #searchbox:focus {}
 .search button {-webkit-appearance: none; border: none; padding: 0; margin: 0; outline: 0; display: inline-block; background-color: transparent; background-size: cover; background-repeat: no-repeat; background-position: left; background-image: url("/assets/rustmb/combined/find.png"); cursor: pointer; width: 24px; height: 24px; position: absolute; top: 19px; right: 19px;}
@@ -258,8 +257,6 @@ a.textlink:hover .linkicon {background-position: right;}
 
 @media (max-width: 859px) {
 	
-	.header .search {margin-right: 0px;}
-	
 	.content {padding-left: 2px; padding-right: 2px;}
 	
 	.metabox-target {margin-left: 0px; margin-right: 0px;}
@@ -274,11 +271,9 @@ a.textlink:hover .linkicon {background-position: right;}
 	
 	.header .navbar:first-child {overflow: auto; zoom: 0.85;}
 	.header .search {box-sizing: border-box; padding-top: 4px; padding-bottom: 4px; padding-left: 4px; padding-right: 102px; margin-right: -106px; display: inline-block;}
-	.header .search.searchspacing_sortrandom {padding-right: 52px; margin-right: -56px;}
-	.header .search.searchspacing_home {padding-right: 4px; margin-right: -8px;}
+	.header .search.search_sortrandom {padding-right: 52px; margin-right: -56px;}
 	.header .search button {top: 7px; right: 105px;}
-	.header .search.searchspacing_sortrandom button {right: 55px;}
-	.header .search.searchspacing_home button {right: 7px;}
+	.header .search.search_sortrandom button {right: 55px;}
 	.header .search + .navbar {overflow: auto; float: right; zoom: 0.8; position: relative;}
 	.header .search + .navbar a {margin-top: 0px; margin-left: 0px;}
 	
