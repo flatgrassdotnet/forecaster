@@ -82,7 +82,7 @@
 					{{template "info" .}}
 				{{else if eq .PageType "search"}}
 					<div style="text-align: center;">
-						<h2 style="margin-top: 0; margin-bottom: 6px;">View <i>{{.Search}}</i> results</h2>
+						<h2 style="margin-top: 0; margin-bottom: 6px;">View <i>{{.Search}}</i> <span class="case"translate="search.results">results</span></h2>
 						<div class="pillbox" style="display: inline-block; width: auto; font-size: 20px;">
 							{{template "searchlinks" .}}
 						</div>
@@ -115,6 +115,6 @@
 				{{end}}
 			</div>
 		{{end}}
-		<dialog id="alert"><h3></h3><p></p><button class="form_btn" onclick="cbalertClose();" autofocus>OK</button></dialog>
+		<dialog id="alert"><h3></h3><p></p><button class="form_btn" onclick="cbalertClose();" autofocus><span translate="dialog.ok">OK</span></button></dialog>
 	</body>
 </html>
