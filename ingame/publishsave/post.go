@@ -29,11 +29,9 @@ import (
 	"github.com/flatgrassdotnet/forecaster/utils"
 )
 
-type PublishSavePost struct{}
+var tp = template.Must(template.New("publish.html").ParseFiles("data/templates/publishsave/publish.html"))
 
-var tp = template.Must(template.New("post.html").ParseFiles("data/templates/publishsave/post.html"))
-
-func Post(w http.ResponseWriter, r *http.Request) {
+func Publish(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {
 		utils.WriteError(w, r, fmt.Sprintf("failed to parse form data: %s", err))
@@ -58,7 +56,7 @@ func Post(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = tp.Execute(w, PublishSavePost{})
+	err = tp.Execute(w, nil)
 	if err != nil {
 		utils.WriteError(w, r, fmt.Sprintf("failed to execute template: %s", err))
 		return

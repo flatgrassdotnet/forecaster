@@ -26,10 +26,7 @@ import (
 	"os"
 
 	"github.com/flatgrassdotnet/forecaster/ingame/browser"
-	"github.com/flatgrassdotnet/forecaster/ingame/home"
 	"github.com/flatgrassdotnet/forecaster/ingame/publishsave"
-	"github.com/flatgrassdotnet/forecaster/ingame/svg"
-	"github.com/flatgrassdotnet/forecaster/ingame/viewer"
 )
 
 func main() {
@@ -41,33 +38,28 @@ func main() {
 	}
 
 	// static assets
-	http.Handle("GET /assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("data/assets"))))
-
-	// cloudbox pages
-	http.HandleFunc("GET /{pagetype}", home.Handle)
-	http.HandleFunc("GET /browse/{category}", browser.Handle)
-	http.HandleFunc("GET /view/{id}", viewer.Handle)
-	http.HandleFunc("GET /svg/{id}", svg.Handle)
+	http.Handle("GET /client/", http.StripPrefix("/client/", http.FileServer(http.Dir("data/client"))))
 
 	// toybox.garrysmod.com
-	http.HandleFunc("GET /API/publishsave_002/", publishsave.Get)
-	http.HandleFunc("POST /API/publishsave_002/", publishsave.Post)
+	http.HandleFunc("GET /", browser.Home)
+	http.HandleFunc("GET /{type}", browser.Browser)
+	http.HandleFunc("GET /search", browser.Search)
 
-	// redirects
-	http.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Path != "/" { // there has to be a better way to do this
-			http.Redirect(w, r, "/error", http.StatusSeeOther)
-			return
-		}
+	// redundant?
+	//http.HandleFunc("GET /IG/{show}", browser.Browser)
 
-		http.Redirect(w, r, "/home", http.StatusSeeOther)
+	// redirect
+	http.HandleFunc("GET /ingame/", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/", http.StatusSeeOther)
 	})
-	http.HandleFunc("GET toybox.garrysmod.com/ingame/", func(w http.ResponseWriter, r *http.Request) {
-		http.Redirect(w, r, "/home", http.StatusSeeOther)
+
+	http.HandleFunc("GET /IG/maps/", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/maps", http.StatusSeeOther)
 	})
-	http.HandleFunc("GET toybox.garrysmod.com/IG/maps/", func(w http.ResponseWriter, r *http.Request) {
-		http.Redirect(w, r, "/browse/maps", http.StatusSeeOther)
-	})
+
+	// save publishing
+	http.HandleFunc("GET /API/publishsave_002/", publishsave.Save)
+	http.HandleFunc("POST /API/publishsave_002/", publishsave.Publish)
 
 	err := http.ListenAndServe(fmt.Sprintf(":%d", *port), nil)
 	if err != nil {

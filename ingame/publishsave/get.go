@@ -28,30 +28,33 @@ import (
 	"github.com/flatgrassdotnet/forecaster/utils"
 )
 
-type PublishSaveGet struct {
+type SaveData struct {
 	ID  int
 	SID int
+	Map string
 }
 
-var tg = template.Must(template.New("get.html").ParseFiles("data/templates/publishsave/get.html"))
+var ts = template.Must(template.New("save.html").ParseFiles("data/templates/publishsave/save.html"))
 
-func Get(w http.ResponseWriter, r *http.Request) {
-	id, err := strconv.Atoi(r.URL.Query().Get("id"))
+func Save(w http.ResponseWriter, r *http.Request) {
+	sd := SaveData{
+		Map: r.Header.Get("MAP"),
+	}
+
+	var err error
+	sd.ID, err = strconv.Atoi(r.URL.Query().Get("id"))
 	if err != nil {
 		utils.WriteError(w, r, fmt.Sprintf("failed to parse id value: %s", err))
 		return
 	}
 
-	sid, err := strconv.Atoi(r.URL.Query().Get("sid"))
+	sd.SID, err = strconv.Atoi(r.URL.Query().Get("sid"))
 	if err != nil {
 		utils.WriteError(w, r, fmt.Sprintf("failed to parse sid value: %s", err))
 		return
 	}
 
-	err = tg.Execute(w, PublishSaveGet{
-		ID:  id,
-		SID: sid,
-	})
+	err = ts.Execute(w, sd)
 	if err != nil {
 		utils.WriteError(w, r, fmt.Sprintf("failed to execute template: %s", err))
 		return
