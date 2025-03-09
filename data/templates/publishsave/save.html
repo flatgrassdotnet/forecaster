@@ -8,26 +8,26 @@
 			<h2>Publish Saved Game</h2>
 			<form action="/API/publishsave_002/?id={{.ID}}&sid={{.SID}}" method="post">
 				<div class="row">
-					<label for="upload_name">Name:</label>
-					<input type="text" name="upload_name" id="upload_name" required>
+					<label for="name">Name:</label>
+					<input type="text" name="name" id="name" required>
 				</div>
 				<div class="row">
 					<label>Map:</label>
 					<input type="text" value="{{.Map}}" disabled>
 				</div>
 				<div class="row">
-					<label for="upload_desc">Description:</label>
-					<textarea name="upload_desc" id="upload_desc" required></textarea>
+					<label for="desc">Description:</label>
+					<textarea name="desc" id="desc" required></textarea>
 				</div>
 				<div class="row">
 					<label>Category:</label>
 					<fieldset>
-						<label><input type="radio" name="upload_cat" value="1" checked> Uncategorized</label>
-						<label><input type="radio" name="upload_cat" value="2"> Fun</label>
-						<label><input type="radio" name="upload_cat" value="3"> Construction</label>
-						<label><input type="radio" name="upload_cat" value="4"> Scene</label>
-						<label><input type="radio" name="upload_cat" value="5"> Assault Course</label>
-						<label><input type="radio" name="upload_cat" value="6"> Gun Fight</label>
+						<label><input type="radio" name="cat" value="1" checked> Uncategorized</label>
+						<label><input type="radio" name="cat" value="2"> Fun</label>
+						<label><input type="radio" name="cat" value="3"> Construction</label>
+						<label><input type="radio" name="cat" value="4"> Scene</label>
+						<label><input type="radio" name="cat" value="5"> Assault Course</label>
+						<label><input type="radio" name="cat" value="6"> Gun Fight</label>
 					</fieldset>
 				</div>
 				<div class="row">
