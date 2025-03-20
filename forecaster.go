@@ -26,7 +26,6 @@ import (
 	"os"
 
 	"github.com/flatgrassdotnet/forecaster/ingame/browser"
-	"github.com/flatgrassdotnet/forecaster/ingame/publishsave"
 )
 
 func main() {
@@ -56,10 +55,6 @@ func main() {
 	http.HandleFunc("GET /IG/maps/", func(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/maps", http.StatusSeeOther)
 	})
-
-	// save publishing
-	http.HandleFunc("GET /API/publishsave_002/", publishsave.Save)
-	http.HandleFunc("POST /API/publishsave_002/", publishsave.Publish)
 
 	err := http.ListenAndServe(fmt.Sprintf(":%d", *port), nil)
 	if err != nil {
